@@ -46,12 +46,12 @@ const SignIn = () => {
       onSuccess: (data) => {
         login(data);
         console.log(data);
-        toast.success("Login successful");
+        toast.success("Giriş Başarılı");
         navigate("/dashboard");
       },
       onError: (error: any) => {
         const errorMessage =
-          error.response?.data?.message || "An error occurred";
+          error.response?.data?.message || "Bir hata oluştu";
         console.log(error);
         toast.error(errorMessage);
       },
@@ -61,9 +61,9 @@ const SignIn = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-muted/40 p-4">
       <Card className="max-w-md w-full shadow-xl">
         <CardHeader className="text-center mb-5">
-          <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+          <CardTitle className="text-2xl font-bold">Tekrar hoş geldiniz</CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
-            Sign in to your account to continue
+            Devam etmek için hesabına giriş yap
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -77,11 +77,11 @@ const SignIn = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel>E-posta Adresi</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="email@example.com"
+                        placeholder="ornek@eposta.com"
                         {...field}
                       />
                     </FormControl>
@@ -95,12 +95,12 @@ const SignIn = () => {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>Şifre</FormLabel>
                       <Link
                         to="/forgot-password"
                         className="text-sm text-blue-600"
                       >
-                        Forgot password?
+                        Şifremi unuttum
                       </Link>
                     </div>
                     <FormControl>
@@ -116,7 +116,7 @@ const SignIn = () => {
               />
 
               <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? <Loader2 className="w-4 h-4 mr-2" /> : "Sign in"}
+                {isPending ? <Loader2 className="w-4 h-4 mr-2" /> : "Giriş Yap"}
               </Button>
             </form>
           </Form>
@@ -124,7 +124,7 @@ const SignIn = () => {
           <CardFooter className="flex items-center justify-center mt-6">
             <div className="flex items-center justify-center">
               <p className="text-sm text-muted-foreground">
-                Don&apos;t have an account? <Link to="/sign-up">Sign up</Link>
+                Hesabın yok mu? <Link to="/sign-up">Kayıt Ol</Link>
               </p>
             </div>
           </CardFooter>

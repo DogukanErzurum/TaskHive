@@ -44,9 +44,9 @@ const SignUp = () => {
   const handleOnSubmit = (values: SignupFormData) => {
     mutate(values, {
       onSuccess: () => {
-        toast.success("Email Verification Required", {
+        toast.success("E-posta Doğrulaması Gerekli", {
           description:
-            "Please check your email for a verification link. If you don't see it, please check your spam folder.",
+            "Lütfen e-posta adresinize gönderilen doğrulama bağlantısını kontrol edin. Gelen kutusunda göremezseniz spam klasörünü kontrol edin.",
         });
 
         form.reset();
@@ -54,7 +54,7 @@ const SignUp = () => {
       },
       onError: (error: any) => {
         const errorMessage =
-          error.response?.data?.message || "An error occurred";
+          error.response?.data?.message || "Bir hata oluştu";
         console.log(error);
         toast.error(errorMessage);
       },
@@ -66,10 +66,10 @@ const SignUp = () => {
       <Card className="max-w-md w-full shadow-xl">
         <CardHeader className="text-center mb-5">
           <CardTitle className="text-2xl font-bold">
-            Create an account
+            Hesap Oluştur
           </CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
-            Create an account to continue
+            Devam etmek için yeni bir hesap oluştur
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -83,11 +83,11 @@ const SignUp = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel>E-posta Adresi</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="email@example.com"
+                        placeholder="ornek@eposta.com"
                         {...field}
                       />
                     </FormControl>
@@ -100,9 +100,9 @@ const SignUp = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Ad Soyad</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="John Doe" {...field} />
+                      <Input type="text" placeholder="Ad Soyad" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -114,7 +114,7 @@ const SignUp = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Şifre</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
@@ -131,7 +131,7 @@ const SignUp = () => {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>Şifreyi Onayla</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
@@ -153,7 +153,7 @@ const SignUp = () => {
           <CardFooter className="flex items-center justify-center mt-6">
             <div className="flex items-center justify-center">
               <p className="text-sm text-muted-foreground">
-                Already have an account? <Link to="/sign-in">Sign in</Link>
+                Zaten hesabın var mı? <Link to="/sign-in">Giriş Yap</Link>
               </p>
             </div>
           </CardFooter>
