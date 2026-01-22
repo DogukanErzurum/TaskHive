@@ -23,11 +23,11 @@ export interface User {
     updatedAt: Date;
   }
   export enum ProjectStatus {
-    PLANNING = "Planning",
-    IN_PROGRESS = "In Progress",
-    ON_HOLD = "On Hold",
-    COMPLETED = "Completed",
-    CANCELLED = "Cancelled",
+    PLANNING = "Planlama",
+    IN_PROGRESS = "Devam Ediyor",
+    ON_HOLD = "Beklemede",
+    COMPLETED = "Tamamlandı",
+    CANCELLED = "İptal Edildi",
   }
   
   export interface Project {
@@ -48,8 +48,8 @@ export interface User {
     updatedAt: Date;
     isArchived: boolean;
   }
-  export type TaskStatus = "To Do" | "In Progress" | "Done";
-  export type TaskPriority = "High" | "Medium" | "Low";
+  export type TaskStatus = "Yapılacak" | "Devam Ediyor" | "Tamamlandı";
+  export type TaskPriority = "Yüksek" | "Orta" | "Düşük";
   export enum ProjectMemberRole {
     MANAGER = "manager",
     CONTRIBUTOR = "contributor",

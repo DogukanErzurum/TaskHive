@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           }
         }
       } catch (error) {
-        console.error("Auth check failed:", error);
+        console.error("Kimlik doğrulama kontrolü başarısız:", error);
       } finally {
         setIsLoading(false);
       }
