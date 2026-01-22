@@ -23,7 +23,7 @@ const VerifyEmail = () => {
           },
           onError: (error: any) => {
             const errorMessage =
-              error.response?.data?.message || "An error occurred";
+              error.response?.data?.message || "Bir hata oluştu";
             setIsSuccess(false);
             console.log(error);
 
@@ -36,14 +36,14 @@ const VerifyEmail = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold">Verify Email</h1>
-      <p className="text-sm text-gray-500">Verifying your email...</p>
+      <h1 className="text-2xl font-bold">E-postayı Doğrula</h1>
+      <p className="text-sm text-gray-500">E-postanız doğrulanıyor...</p>
 
       <Card className="w-full max-w-md">
         {/* <CardHeader>
           <Link to="/sign-in" className="flex items-center gap-2 text-sm">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Sign in
+            Giriş sayfasına dön
           </Link>
         </CardHeader> */}
 
@@ -52,34 +52,34 @@ const VerifyEmail = () => {
             {isVerifying ? (
               <>
                 <Loader className="w-10 h-10 text-gray-500 animate-spin" />
-                <h3 className="text-lg font-semibold">Verifying email...</h3>
+                <h3 className="text-lg font-semibold">E-posta doğrulanıyor...</h3>
                 <p className="text-sm text-gray-500">
-                  Please wait while we verify your email.
+                  Lütfen e-postanızı doğrularken bekleyin.
                 </p>
               </>
             ) : isSuccess ? (
               <>
                 <CheckCircle className="w-10 h-10 text-green-500" />
-                <h3 className="text-lg font-semibold">Email Verified</h3>
+                <h3 className="text-lg font-semibold">E-posta Doğrulandı</h3>
                 <p className="text-sm text-gray-500">
-                  Your email has been verified successfully.
+                  E-posta doğrulaması başarılı.
                 </p>
                 <Link to="/sign-in" className="text-sm text-blue-500 mt-6">
-                  <Button variant="outline">Back to Sign in</Button>
+                  <Button variant="outline">Giriş sayfasına dön</Button>
                 </Link>
               </>
             ) : (
               <>
                 <XCircle className="w-10 h-10 text-red-500" />
                 <h3 className="text-lg font-semibold">
-                  Email Verification Failed
+                  E-posta Doğrulama Başarısız
                 </h3>
                 <p className="text-sm text-gray-500">
-                  Your email verification failed. Please try again.
+                  E-posta doğrulama işlemi başarısız oldu. Lütfen tekrar deneyin.
                 </p>
 
                 <Link to="/sign-in" className="text-sm text-blue-500 mt-6">
-                  <Button variant="outline">Back to Sign in</Button>
+                  <Button variant="outline">Giriş sayfasına dön</Button>
                 </Link>
               </>
             )}

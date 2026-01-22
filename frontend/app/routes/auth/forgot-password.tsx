@@ -50,9 +50,9 @@ const ForgotPassword = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="w-full max-w-md space-y-6">
         <div className="flex flex-col items-center justify-center space-y-2">
-          <h1 className="text-2xl font-bold">Forgot Password</h1>
+          <h1 className="text-2xl font-bold">Şifremi Unuttum</h1>
           <p className="text-muted-foreground">
-            Enter your email to reset your password
+            Şifrenizi sıfırlamak için e-posta adresinizi girin
           </p>
         </div>
 
@@ -60,7 +60,7 @@ const ForgotPassword = () => {
           <CardHeader>
             <Link to="/sign-in" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to sign in</span>
+              <span>Giriş sayfasına dön</span>
             </Link>
           </CardHeader>
 
@@ -69,10 +69,10 @@ const ForgotPassword = () => {
               <div className="flex flex-col items-center justify-center">
                 <CheckCircle className="w-10 h-10 text-green-500" />
                 <h1 className="text-2xl font-bold">
-                  Password reset email sent
+                  Şifre sıfırlama e-postası gönderildi
                 </h1>
                 <p className="text-muted-foreground">
-                  Check your email for a link to reset your password
+                  Şifrenizi sıfırlamak için e-postanıza gelen bağlantıyı kontrol edin
                 </p>
               </div>
             ) : (
@@ -87,9 +87,9 @@ const ForgotPassword = () => {
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address</FormLabel>
+                          <FormLabel>E-posta Adresi</FormLabel>
                           <FormControl>
-                            <Input {...field} placeholder="Enter your email" />
+                            <Input {...field} placeholder="E-posta adresinizi girin" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -104,7 +104,7 @@ const ForgotPassword = () => {
                       {isPending ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
-                        "Reset Password"
+                        "Şifreyi Sıfırla"
                       )}
                     </Button>
                   </form>

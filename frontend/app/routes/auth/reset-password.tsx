@@ -39,7 +39,7 @@ const ResetPassword = () => {
 
   const onSubmit = (values: ResetPasswordFormData) => {
     if (!token) {
-      toast.error("Invalid token");
+      toast.error("Geçersiz token");
       return;
     }
 
@@ -62,15 +62,15 @@ const ResetPassword = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="w-full max-w-md space-y-6">
         <div className="flex flex-col items-center justify-center space-y-2">
-          <h1 className="text-2xl font-bold">Reset Password</h1>
-          <p className="text-muted-foreground">Enter your password below</p>
+          <h1 className="text-2xl font-bold">Şifreyi Sıfırla</h1>
+          <p className="text-muted-foreground">Yeni şifrenizi aşağıya girin</p>
         </div>
 
         <Card>
           <CardHeader>
             <Link to="/sign-in" className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to sign in</span>
+              <span>Giriş sayfasına dön</span>
             </Link>
           </CardHeader>
 
@@ -79,7 +79,7 @@ const ResetPassword = () => {
               <div className="flex flex-col items-center justify-center">
                 <CheckCircle className="w-10 h-10 text-green-500" />
                 <h1 className="text-2xl font-bold">
-                  Password reset successful
+                  Şifre başarıyla sıfırlandı
                 </h1>
               </div>
             ) : (
@@ -93,9 +93,9 @@ const ResetPassword = () => {
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>New Password</FormLabel>
+                        <FormLabel>Yeni Şifre</FormLabel>
                         <FormControl>
-                          <Input {...field} placeholder="Enter your email" />
+                          <Input {...field} placeholder="Yeni şifrenizi girin" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -106,9 +106,9 @@ const ResetPassword = () => {
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>New Password</FormLabel>
+                        <FormLabel>Yeni Şifreyi Onayla</FormLabel>
                         <FormControl>
-                          <Input {...field} placeholder="Enter your email" />
+                          <Input {...field} placeholder="Yeni şifrenizi tekrar girin" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -119,7 +119,7 @@ const ResetPassword = () => {
                     {isPending ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
-                      "Reset Password"
+                      "Şifreyi Sıfırla"
                     )}
                   </Button>
                 </form>

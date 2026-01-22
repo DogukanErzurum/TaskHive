@@ -14,14 +14,14 @@ const registerUser = async (req, res) => {
 
     if (decision.isDenied()) {
       res.writeHead(403, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ message: "Invalid email address" }));
+      res.end(JSON.stringify({ message: "Geçersiz e-posta adresi" }));
     }
 
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({
-        message: "Email address already in use",
+        message: "Bu e-posta adresi zaten kullanımda",
       });
     }
 
@@ -49,25 +49,25 @@ const registerUser = async (req, res) => {
 
     // send email
     const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
-    const emailBody = `<p>Click <a href="${verificationLink}">here</a> to verify your email</p>`;
-    const emailSubject = "Verify your email";
+    const emailBody = `<p>E-postanızı doğrulamak için="${verificationLink}">buraya</a> tıklayın</p>`;
+    const emailSubject = "E-posta Doğrulama";
 
     const isEmailSent = await sendEmail(email, emailSubject, emailBody);
 
     if (!isEmailSent) {
       return res.status(500).json({
-        message: "Failed to send verification email",
+        message: "Doğrulama e-postası gönderilemedi",
       });
     }
 
     res.status(201).json({
       message:
-        "Verification email sent to your email. Please check and verify your account.",
+        "Doğrulama e-postası gönderildi. Lütfen e-postanızı kontrol ederek hesabınızı doğrulayın.",
     });
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 
@@ -78,7 +78,7 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "E-posta veya şifre hatalı" });
     }
 
     if (!user.isEmailVerified) {
@@ -89,7 +89,7 @@ const loginUser = async (req, res) => {
       if (existingVerification && existingVerification.expiresAt > new Date()) {
         return res.status(400).json({
           message:
-            "Email not verified. Please check your email for the verification link.",
+            "E-posta doğrulanmamış. Lütfen doğrulama bağlantısı için e-postanızı kontrol edin.",
         });
       } else {
         await Verification.findByIdAndDelete(existingVerification._id);
@@ -252,21 +252,21 @@ const resetPasswordRequest = async (req, res) => {
     });
 
     const resetPasswordLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetPasswordToken}`;
-    const emailBody = `<p>Click <a href="${resetPasswordLink}">here</a> to reset your password</p>`;
-    const emailSubject = "Reset your password";
+    const emailBody = `<p>E-postanızı doğrulamak için <a href="${resetPasswordLink}">buraya</a> tıklayın.</p>`;
+    const emailSubject = "E-posta Doğrulama";
 
     const isEmailSent = await sendEmail(email, emailSubject, emailBody);
 
     if (!isEmailSent) {
       return res.status(500).json({
-        message: "Failed to send reset password email",
+        message: "Doğrulama e-postası gönderilemedi",
       });
     }
 
-    res.status(200).json({ message: "Reset password email sent" });
+    res.status(200).json({ message: "Şifre sıfırlama e-postası gönderildi" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 
@@ -277,13 +277,13 @@ const verifyResetPasswordTokenAndResetPassword = async (req, res) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!payload) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     const { userId, purpose } = payload;
 
     if (purpose !== "reset-password") {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     const verification = await Verification.findOne({
@@ -292,23 +292,23 @@ const verifyResetPasswordTokenAndResetPassword = async (req, res) => {
     });
 
     if (!verification) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     const isTokenExpired = verification.expiresAt < new Date();
 
     if (isTokenExpired) {
-      return res.status(401).json({ message: "Token expired" });
+      return res.status(401).json({ message: "Token süresi dolmuş" });
     }
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     if (newPassword !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
+      return res.status(400).json({ message: "Şifreler eşleşmiyor" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -320,10 +320,10 @@ const verifyResetPasswordTokenAndResetPassword = async (req, res) => {
 
     await Verification.findByIdAndDelete(verification._id);
 
-    res.status(200).json({ message: "Password reset successfully" });
+    res.status(200).json({ message: "Şifre başarıyla sıfırlandı" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 export {
