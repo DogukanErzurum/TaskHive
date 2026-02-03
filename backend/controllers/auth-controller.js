@@ -10,7 +10,7 @@ const registerUser = async (req, res) => {
     const { email, name, password } = req.body;
 
     const decision = await aj.protect(req, { email });
-    console.log("Arcjet decision", decision.isDenied());
+    console.log("Arcjet kararı (engellendi mi?)", decision.isDenied());
 
     if (decision.isDenied()) {
       res.writeHead(403, { "Content-Type": "application/json" });
@@ -49,7 +49,7 @@ const registerUser = async (req, res) => {
 
     // send email
     const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
-    const emailBody = `<p>E-postanızı doğrulamak için="${verificationLink}">buraya</a> tıklayın</p>`;
+    const emailBody = `<p>E-postanızı doğrulamak için <a href="${verificationLink}">buraya</a> tıklayın</p>`;
     const emailSubject = "E-posta Doğrulama";
 
     const isEmailSent = await sendEmail(email, emailSubject, emailBody);
@@ -108,20 +108,20 @@ const loginUser = async (req, res) => {
 
         // send email
         const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
-        const emailBody = `<p>Click <a href="${verificationLink}">here</a> to verify your email</p>`;
-        const emailSubject = "Verify your email";
+        const emailBody = `<p>E-postanızı doğrulamak için <a href="${verificationLink}">buraya</a> tıklayın.</p>`;
+        const emailSubject = "E-posta Doğrulama";
 
         const isEmailSent = await sendEmail(email, emailSubject, emailBody);
 
         if (!isEmailSent) {
           return res.status(500).json({
-            message: "Failed to send verification email",
+            message: "Doğrulama e-postası gönderilemedi",
           });
         }
 
         res.status(201).json({
           message:
-            "Verification email sent to your email. Please check and verify your account.",
+            "Doğrulama e-postası gönderildi. Lütfen e-postanızı kontrol ederek hesabınızı doğrulayın.",
         });
       }
     }
@@ -129,7 +129,7 @@ const loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "E-posta veya şifre hatalı" });
     }
 
     const token = jwt.sign(
@@ -145,14 +145,14 @@ const loginUser = async (req, res) => {
     delete userData.password;
 
     res.status(200).json({
-      message: "Login successful",
+      message: "Giriş Başarılı",
       token,
       user: userData,
     });
   } catch (error) {
     console.log(error);
 
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Sunucu Hatası" });
   }
 };
 
@@ -163,13 +163,13 @@ const verifyEmail = async (req, res) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!payload) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     const { userId, purpose } = payload;
 
     if (purpose !== "email-verification") {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     const verification = await Verification.findOne({
@@ -178,23 +178,23 @@ const verifyEmail = async (req, res) => {
     });
 
     if (!verification) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     const isTokenExpired = verification.expiresAt < new Date();
 
     if (isTokenExpired) {
-      return res.status(401).json({ message: "Token expired" });
+      return res.status(401).json({ message: "Token süresi dolmuş" });
     }
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Yetkisiz işlem" });
     }
 
     if (user.isEmailVerified) {
-      return res.status(400).json({ message: "Email already verified" });
+      return res.status(400).json({ message: "E-posta zaten doğrulanmış" });
     }
 
     user.isEmailVerified = true;
@@ -202,10 +202,10 @@ const verifyEmail = async (req, res) => {
 
     await Verification.findByIdAndDelete(verification._id);
 
-    res.status(200).json({ message: "Email verified successfully" });
+    res.status(200).json({ message: "E-posta başarıyla doğrulandı" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 
@@ -216,13 +216,13 @@ const resetPasswordRequest = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: "Kullanıcı bulunamadı" });
     }
 
     if (!user.isEmailVerified) {
       return res
         .status(400)
-        .json({ message: "Please verify your email first" });
+        .json({ message: "Lütfen önce e-posta adresinizi doğrulayın" });
     }
 
     const existingVerification = await Verification.findOne({
@@ -231,7 +231,7 @@ const resetPasswordRequest = async (req, res) => {
 
     if (existingVerification && existingVerification.expiresAt > new Date()) {
       return res.status(400).json({
-        message: "Reset password request already sent",
+        message: "Şifre sıfırlama isteği zaten gönderildi",
       });
     }
 
