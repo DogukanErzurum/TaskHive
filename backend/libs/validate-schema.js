@@ -1,47 +1,47 @@
 import { z } from "zod";
 
 const registerSchema = z.object({
-  name: z.string().min(3, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
+  name: z.string().min(3, "İsim zorunludur"),
+  email: z.string().email("Geçersiz e-posta adresi"),
+  password: z.string().min(8, "Şifre en az 8 karakter uzunluğunda olmalıdır"),
 });
 
 const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(1, "Password is required"),
+  email: z.string().email("Geçersiz e-posta adresi"),
+  password: z.string().min(1, "Şifre zorunludur"),
 });
 
 const verifyEmailSchema = z.object({
-  token: z.string().min(1, "Token is required"),
+  token: z.string().min(1, "Token zorunludur"),
 });
 
 const resetPasswordSchema = z.object({
-  token: z.string().min(1, "Token is required"),
-  newPassword: z.string().min(8, "Password must be at least 8 characters long"),
-  confirmPassword: z.string().min(1, "Confirm password is required"),
+  token: z.string().min(1, "Token zorunludur"),
+  newPassword: z.string().min(8, "Şifre en az 8 karakter uzunluğunda olmalıdır"),
+  confirmPassword: z.string().min(1, "Şifre doğrulama zorunludur"),
 });
 
 const emailSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z.string().email("Geçersiz e-posta adresi"),
 });
 
 const inviteMemberSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z.string().email("Geçersiz e-posta adresi"),
   role: z.enum(["admin", "member", "viewer"]),
 });
 
 const tokenSchema = z.object({
-  token: z.string().min(1, "Token is required"),
+  token: z.string().min(1, "Token zorunludur"),
 });
 
 const workspaceSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z.string().min(1, "İsim zorunludur"),
   description: z.string().optional(),
-  color: z.string().min(1, "Color is required"),
+  color: z.string().min(1, "Renk zorunludur"),
 });
 
 const projectSchema = z.object({
-  title: z.string().min(3, "Title is required"),
+  title: z.string().min(3, "Başlık zorunludur"),
   description: z.string().optional(),
   status: z.enum([
     "Planning",
@@ -64,12 +64,12 @@ const projectSchema = z.object({
 });
 
 const taskSchema = z.object({
-  title: z.string().min(1, "Task title is required"),
+  title: z.string().min(1, "Görev başlığı zorunludur"),
   description: z.string().optional(),
   status: z.enum(["To Do", "In Progress", "Done"]),
   priority: z.enum(["Low", "Medium", "High"]),
-  dueDate: z.string().min(1, "Due date is required"),
-  assignees: z.array(z.string()).min(1, "At least one assignee is required"),
+  dueDate: z.string().min(1, "Bitiş tarihi zorunludur"),
+  assignees: z.array(z.string()).min(1, "En az bir sorumlu atanmalıdır"),
 });
 
 export {
