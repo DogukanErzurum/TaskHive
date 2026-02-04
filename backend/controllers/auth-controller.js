@@ -10,7 +10,7 @@ const registerUser = async (req, res) => {
     const { email, name, password } = req.body;
 
     const decision = await aj.protect(req, { email });
-    console.log("Arcjet kararı (engellendi mi?)", decision.isDenied());
+    console.log("Arcjet kararı", decision.isDenied());
 
     if (decision.isDenied()) {
       res.writeHead(403, { "Content-Type": "application/json" });
