@@ -1,4 +1,4 @@
-import type { ProjectStatus, Task, TaskStatus } from "@/types";
+import { ProjectStatus, type Task, type TaskStatus } from "@/types";
 
 export const publicRoutes = [
   "/",
@@ -12,25 +12,26 @@ export const publicRoutes = [
 
 export const getTaskStatusColor = (status: ProjectStatus) => {
   switch (status) {
-    case "In Progress":
+    case ProjectStatus.IN_PROGRESS:
       return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300";
-    case "Completed":
+    case ProjectStatus.COMPLETED:
       return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
-    case "Cancelled":
+    case ProjectStatus.CANCELLED:
       return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
-    case "On Hold":
+    case ProjectStatus.ON_HOLD:
       return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
-    case "Planning":
+    case ProjectStatus.PLANNING:
       return "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300";
     default:
-      return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
+      return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300";
   }
 };
+
 
 export const getProjectProgress = (tasks: { status: TaskStatus }[]) => {
   const totalTasks = tasks.length;
 
-  const completedTasks = tasks.filter((task) => task?.status === "Done").length;
+  const completedTasks = tasks.filter((task) => task?.status === "Tamamlandı").length;
 
   const progress =
     totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;

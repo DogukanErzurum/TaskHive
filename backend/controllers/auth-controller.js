@@ -13,8 +13,7 @@ const registerUser = async (req, res) => {
     console.log("Arcjet kararı", decision.isDenied());
 
     if (decision.isDenied()) {
-      res.writeHead(403, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ message: "Geçersiz e-posta adresi" }));
+      return res.status(403).json({ message: "Geçersiz e-posta adresi" });
     }
 
     const existingUser = await User.findOne({ email });
