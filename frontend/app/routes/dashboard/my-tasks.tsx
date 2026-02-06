@@ -73,11 +73,11 @@ const MyTasks = () => {
       ? myTasks
           .filter((task) => {
             if (filter === "all") return true;
-            if (filter === "todo") return task.status === "To Do";
-            if (filter === "inprogress") return task.status === "In Progress";
-            if (filter === "done") return task.status === "Done";
+            if (filter === "todo") return task.status === "Yapılacak";
+            if (filter === "inprogress") return task.status === "Devam Ediyor";
+            if (filter === "done") return task.status === "Tamamlandı";
             if (filter === "achieved") return task.isArchived === true;
-            if (filter === "high") return task.priority === "High";
+            if (filter === "high") return task.priority === "Yüksek";
 
             return true;
           })
@@ -98,11 +98,11 @@ const MyTasks = () => {
     return 0;
   });
 
-  const todoTasks = sortedTasks.filter((task) => task.status === "To Do");
+  const todoTasks = sortedTasks.filter((task) => task.status === "Yapılacak");
   const inProgressTasks = sortedTasks.filter(
-    (task) => task.status === "In Progress"
+    (task) => task.status === "Devam Ediyor"
   );
-  const doneTasks = sortedTasks.filter((task) => task.status === "Done");
+  const doneTasks = sortedTasks.filter((task) => task.status === "Tamamlandı");
 
   if (isLoading)
     return (
@@ -192,7 +192,7 @@ const MyTasks = () => {
                     <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-3">
                       <div className="flex">
                         <div className="flex gap-2 mr-2">
-                          {task.status === "Done" ? (
+                          {task.status === "Tamamlandı" ? (
                             <CheckCircle className="size-4 text-green-500" />
                           ) : (
                             <Clock className="size-4 text-yellow-500" />
@@ -210,7 +210,7 @@ const MyTasks = () => {
                           <div className="flex items-center space-x-2 mt-1">
                             <Badge
                               variant={
-                                task.status === "Done" ? "default" : "outline"
+                                task.status === "Tamamlandı" ? "default" : "outline"
                               }
                             >
                               {task.status}
@@ -219,7 +219,7 @@ const MyTasks = () => {
                             {task.priority && (
                               <Badge
                                 variant={
-                                  task.priority === "High"
+                                  task.priority === "Yüksek"
                                     ? "destructive"
                                     : "secondary"
                                 }
@@ -292,7 +292,7 @@ const MyTasks = () => {
                       <div className="flex items-center mt-2 gap-2">
                         <Badge
                           variant={
-                            task.priority === "High"
+                            task.priority === "Yüksek"
                               ? "destructive"
                               : "secondary"
                           }
@@ -344,7 +344,7 @@ const MyTasks = () => {
                       <div className="flex items-center mt-2 gap-2">
                         <Badge
                           variant={
-                            task.priority === "High"
+                            task.priority === "Yüksek"
                               ? "destructive"
                               : "secondary"
                           }
@@ -396,7 +396,7 @@ const MyTasks = () => {
                       <div className="flex items-center mt-2 gap-2">
                         <Badge
                           variant={
-                            task.priority === "High"
+                            task.priority === "Yüksek"
                               ? "destructive"
                               : "secondary"
                           }
