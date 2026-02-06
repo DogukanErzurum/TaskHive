@@ -19,8 +19,17 @@ const Dashboard = () => {
   const [searchParams] = useSearchParams();
   const workspaceId = searchParams.get("workspaceId");
 
-  const { data, isPending } = useGetWorkspaceStatsQuery(workspaceId!) as {
-    data: {
+  // workspaceId yoksa daha query çalıştırmadan ekrana mesaj bas
+  if (!workspaceId) {
+    return (
+      <div className="p-6 text-muted-foreground">
+        workspaceId bulunamadı. URL'e ?workspaceId=... eklenmeli.
+      </div>
+    );
+  }
+
+  const { data, isPending, isError, error } = useGetWorkspaceStatsQuery(workspaceId) as {
+    data?: {
       stats: StatsCardProps;
       taskTrendsData: TaskTrendsData[];
       projectStatusData: ProjectStatusData[];
@@ -30,12 +39,31 @@ const Dashboard = () => {
       recentProjects: Project[];
     };
     isPending: boolean;
+    isError: boolean;
+    error: any;
   };
 
   if (isPending) {
     return (
       <div>
         <Loader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="p-6 text-red-600">
+        Dashboard verisi alınamadı: {error?.message ?? "Bilinmeyen hata"}
+      </div>
+    );
+  }
+
+  // En kritik satır: data yoksa çökme, fallback dön
+  if (!data) {
+    return (
+      <div className="p-6 text-muted-foreground">
+        Dashboard verisi boş döndü.
       </div>
     );
   }
