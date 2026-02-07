@@ -22,8 +22,8 @@ app.use(morgan("dev"));
 // db connection
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => console.log("BD Connected successfully."))
-  .catch((err) => console.log("Failed to connect to DB:", err));
+  .then(() => console.log("Database Bağlantısı Başarılı."))
+  .catch((err) => console.log("Database Bağlantısı Başarısız:", err));
 
 app.use(express.json());
 
@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 5000;
 
 app.get("/", async (req, res) => {
   res.status(200).json({
-    message: "Welcome to TaskHive API",
+    message: "TaskHive API'ye hoş geldiniz",
   });
 });
 // http:localhost:500/api-v1/
@@ -40,13 +40,13 @@ app.use("/api-v1", routes);
 // error middleware
 app.use((err, req, res, next) => {
   console.log(err.stack);
-  res.status(500).json({ message: "Internal server error" });
+  res.status(500).json({ message: "Sunucu hatası" });
 });
 
 // not found middleware
 app.use((req, res) => {
   res.status(404).json({
-    message: "Not found",
+    message: "Bulunamadı",
   });
 });
 

@@ -62,7 +62,7 @@ export const Header = ({
                   <span className="font-medium">{selectedWorkspace?.name}</span>
                 </>
               ) : (
-                <span className="font-medium">Select Workspace</span>
+                <span className="font-medium">Proje Seç</span>
               )}
             </Button>
           </DropdownMenuTrigger>
@@ -88,7 +88,7 @@ export const Header = ({
             <DropdownMenuGroup>
               <DropdownMenuItem onClick={onCreateWorkspace}>
                 <PlusCircle className="w-4 h-4 mr-2" />
-                Create Workspace
+                Proje Oluştur
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
@@ -112,13 +112,13 @@ export const Header = ({
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>Hesabım</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link to="/user/profile">Profile</Link>
+                <Link to="/user/profile">Profil</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>Çıkış Yap</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
