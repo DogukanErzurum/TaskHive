@@ -11,6 +11,7 @@ import {
   Settings,
   Users,
   ListTodo,
+  Briefcase,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
@@ -35,7 +36,7 @@ export const SidebarComponent = ({
     {
       title: "Workspaces",
       href: "/workspaces",
-      icon: Users,
+      icon: Briefcase,
     },
     {
       title: "My Tasks",

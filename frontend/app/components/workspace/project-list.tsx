@@ -16,13 +16,13 @@ export const ProjectList = ({
 }: ProjectListProps) => {
   return (
     <div>
-      <h3 className="text-xl font-medium mb-4">Projects</h3>
+      <h3 className="text-xl font-medium mb-4">Projeler</h3>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.length === 0 ? (
           <NoDataFound
-            title="No projects found"
-            description="Create a project to get started"
-            buttonText="Create Project"
+            title="Projeler bulunamadı"
+            description="Başlamak için yeni bir proje oluşturun"
+            buttonText="Proje Oluştur"
             buttonAction={onCreateProject}
           />
         ) : (

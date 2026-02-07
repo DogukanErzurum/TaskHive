@@ -39,11 +39,11 @@ export const WorkspaceHeader = ({
           <div className="flex items-center gap-3 justify-between md:justify-start mb-4 md:mb-0">
             <Button variant={"outline"} onClick={onInviteMember}>
               <UserPlus className="size-4 mr-2" />
-              Invite
+              Davet Et
             </Button>
             <Button onClick={onCreateProject}>
               <Plus className="size-4 mr-2" />
-              Create Project
+              Proje Oluştur
             </Button>
           </div>
         </div>
@@ -57,7 +57,7 @@ export const WorkspaceHeader = ({
 
       {members.length > 0 && (
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Members</span>
+          <span className="text-sm text-muted-foreground">Üyeler</span>
 
           <div className="flex space-x-2">
             {members.map((member) => (

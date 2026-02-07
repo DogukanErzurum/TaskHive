@@ -32,11 +32,11 @@ const Workspaces = () => {
     <>
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl md:text-3xl font-bold">Workspaces</h2>
+          <h2 className="text-xl md:text-3xl font-bold">Çalışma Alanları</h2>
 
           <Button onClick={() => setIsCreatingWorkspace(true)}>
             <PlusCircle className="size-4 mr-2" />
-            New Workspace
+            Yeni Proje
           </Button>
         </div>
 
@@ -47,9 +47,9 @@ const Workspaces = () => {
 
           {workspaces.length === 0 && (
             <NoDataFound
-              title="No workspaces found"
-              description="Create a new workspace to get started"
-              buttonText="Create Workspace"
+              title="Proje bulunamadı"
+              description="Başlamak için yeni bir proje oluşturun"
+              buttonText="Proje Oluştur"
               buttonAction={() => setIsCreatingWorkspace(true)}
             />
           )}
@@ -76,7 +76,7 @@ const WorkspaceCard = ({ workspace }: { workspace: Workspace }) => {
               <div>
                 <CardTitle>{workspace.name}</CardTitle>
                 <span className="text-xs text-muted-foreground">
-                  Created at {format(workspace.createdAt, "MMM d, yyyy h:mm a")}
+                  Oluşturulma tarihi {format(workspace.createdAt, "MMM d, yyyy h:mm a")}
                 </span>
               </div>
             </div>
@@ -88,13 +88,13 @@ const WorkspaceCard = ({ workspace }: { workspace: Workspace }) => {
           </div>
 
           <CardDescription>
-            {workspace.description || "No description"}
+            {workspace.description || "Açıklama yok"}
           </CardDescription>
         </CardHeader>
 
         <CardContent>
           <div className="text-sm text-muted-foreground">
-            View workspace details and projects
+          Proje detaylarını görüntüle
           </div>
         </CardContent>
       </Card>

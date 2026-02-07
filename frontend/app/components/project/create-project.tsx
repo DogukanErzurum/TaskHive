@@ -77,7 +77,7 @@ export const CreateProjectDialog = ({
       },
       {
         onSuccess: () => {
-          toast.success("Project created successfully");
+          toast.success("Proje başarıyla oluşturuldu");
           form.reset();
           onOpenChange(false);
         },
@@ -94,9 +94,9 @@ export const CreateProjectDialog = ({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[540px]">
         <DialogHeader>
-          <DialogTitle>Create Project</DialogTitle>
+          <DialogTitle>Proje Oluştur</DialogTitle>
           <DialogDescription>
-            Create a new project to get started
+            Başlamak için yeni bir proje oluşturun
           </DialogDescription>
         </DialogHeader>
 
@@ -107,9 +107,9 @@ export const CreateProjectDialog = ({
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Title</FormLabel>
+                  <FormLabel>Proje Başlığı</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Project Title" />
+                    <Input {...field} placeholder="Proje Başlığı" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,11 +120,11 @@ export const CreateProjectDialog = ({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Description</FormLabel>
+                  <FormLabel>Proje Açıklaması</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder="Project Description"
+                      placeholder="Proje Açıklaması"
                       rows={3}
                     />
                   </FormControl>
@@ -137,11 +137,11 @@ export const CreateProjectDialog = ({
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Status</FormLabel>
+                  <FormLabel>Proje Durumu</FormLabel>
                   <FormControl>
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select Project Status" />
+                        <SelectValue placeholder="Proje Durumu Seçin" />
                       </SelectTrigger>
 
                       <SelectContent>
@@ -164,7 +164,7 @@ export const CreateProjectDialog = ({
                 name="startDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Start Date</FormLabel>
+                    <FormLabel>Başlangıç Tarihi</FormLabel>
                     <FormControl>
                       <Popover modal={true}>
                         <PopoverTrigger asChild>
@@ -179,7 +179,7 @@ export const CreateProjectDialog = ({
                             {field.value ? (
                               format(new Date(field.value), "PPPP")
                             ) : (
-                              <span>Pick a date</span>
+                              <span>Tarih seçin</span>
                             )}
                           </Button>
                         </PopoverTrigger>
@@ -206,7 +206,7 @@ export const CreateProjectDialog = ({
                 name="dueDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Due Date</FormLabel>
+                    <FormLabel>Bitiş Tarihi</FormLabel>
                     <FormControl>
                       <Popover modal={true}>
                         <PopoverTrigger asChild>
@@ -221,7 +221,7 @@ export const CreateProjectDialog = ({
                             {field.value ? (
                               format(new Date(field.value), "PPPP")
                             ) : (
-                              <span>Pick a date</span>
+                              <span>Tarih seçin</span>
                             )}
                           </Button>
                         </PopoverTrigger>
@@ -250,9 +250,9 @@ export const CreateProjectDialog = ({
               name="tags"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tags</FormLabel>
+                  <FormLabel>Etiketler</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Tags separated by comma" />
+                    <Input {...field} placeholder="Etiketleri virgülle ayırın" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -267,7 +267,7 @@ export const CreateProjectDialog = ({
 
                 return (
                   <FormItem>
-                    <FormLabel>Members</FormLabel>
+                    <FormLabel>Üyeler</FormLabel>
                     <FormControl>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -277,7 +277,7 @@ export const CreateProjectDialog = ({
                           >
                             {selectedMembers.length === 0 ? (
                               <span className="text-muted-foreground">
-                                Select Members
+                                Üye seçin
                               </span>
                             ) : selectedMembers.length <= 2 ? (
                               selectedMembers.map((m) => {
@@ -288,7 +288,7 @@ export const CreateProjectDialog = ({
                                 return `${member?.user.name} (${member?.role})`;
                               })
                             ) : (
-                              `${selectedMembers.length} members selected`
+                              `${selectedMembers.length} üye seçildi`
                             )}
                           </Button>
                         </PopoverTrigger>
@@ -352,17 +352,17 @@ export const CreateProjectDialog = ({
                                       }}
                                     >
                                       <SelectTrigger>
-                                        <SelectValue placeholder="Select Role" />
+                                        <SelectValue placeholder="Rol Seçin" />
                                       </SelectTrigger>
                                       <SelectContent>
                                         <SelectItem value="manager">
-                                          Manager
+                                          Yönetici
                                         </SelectItem>
                                         <SelectItem value="contributor">
-                                          Contributor
+                                          Katkıda Bulunan
                                         </SelectItem>
                                         <SelectItem value="viewer">
-                                          Viewer
+                                          Görüntüleyici
                                         </SelectItem>
                                       </SelectContent>
                                     </Select>
@@ -382,7 +382,7 @@ export const CreateProjectDialog = ({
 
             <DialogFooter>
               <Button type="submit" disabled={isPending}>
-                {isPending ? "Creating..." : "Create Project"}
+                {isPending ? "Oluşturuluyor..." : "Proje Oluştur"}
               </Button>
             </DialogFooter>
           </form>
