@@ -27,7 +27,7 @@ const DashboardLayout = () => {
     return <Loader />;
   }
 
-  if (!isAuthenticated) {
+if (!isAuthenticated) {
     return <Navigate to="/sign-in" />;
   }
 
