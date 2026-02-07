@@ -64,7 +64,7 @@ export const CreateWorkspace = ({
       onSuccess: (data: any) => {
         form.reset();
         setIsCreatingWorkspace(false);
-        toast.success("Workspace created successfully");
+        toast.success("Proje başarıyla oluşturuldu");
         navigate(`/workspaces/${data._id}`);
       },
       onError: (error: any) => {
@@ -83,7 +83,7 @@ export const CreateWorkspace = ({
     >
       <DialogContent className="max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Create Workspace</DialogTitle>
+          <DialogTitle>Proje Oluştur</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -94,9 +94,9 @@ export const CreateWorkspace = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Adı</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Workspace Name" />
+                      <Input {...field} placeholder="Proje Adı" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -107,11 +107,11 @@ export const CreateWorkspace = ({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Açıklama</FormLabel>
                     <FormControl>
                       <Textarea
                         {...field}
-                        placeholder="Workspace Description"
+                        placeholder="Proje Açıklaması"
                         rows={3}
                       />
                     </FormControl>
@@ -124,7 +124,7 @@ export const CreateWorkspace = ({
                 name="color"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Color</FormLabel>
+                    <FormLabel>Renk</FormLabel>
                     <FormControl>
                       <div className="flex gap-3 flex-wrap">
                         {colorOptions.map((color) => (
@@ -149,7 +149,7 @@ export const CreateWorkspace = ({
 
             <DialogFooter>
               <Button type="submit" disabled={isPending}>
-                {isPending ? "Creating..." : "Create"}
+                {isPending ? "Oluşturuluyor..." : "Oluştur"}
               </Button>
             </DialogFooter>
           </form>
