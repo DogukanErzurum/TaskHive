@@ -12,7 +12,7 @@ const createProject = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -22,7 +22,7 @@ const createProject = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this workspace",
+        message: "Bu çalışma alanının üyesi değilsiniz",
       });
     }
 
@@ -47,7 +47,7 @@ const createProject = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası",
     });
   }
 };
@@ -60,7 +60,7 @@ const getProjectDetails = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -70,7 +70,7 @@ const getProjectDetails = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -78,7 +78,7 @@ const getProjectDetails = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası",
     });
   }
 };
@@ -90,7 +90,7 @@ const getProjectTasks = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -100,7 +100,7 @@ const getProjectTasks = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -118,7 +118,7 @@ const getProjectTasks = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatsaı",
     });
   }
 };

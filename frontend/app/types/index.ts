@@ -23,12 +23,20 @@ export interface User {
     updatedAt: Date;
   }
   export enum ProjectStatus {
-    PLANNING = "Planlama",
-    IN_PROGRESS = "Devam Ediyor",
-    ON_HOLD = "Beklemede",
-    COMPLETED = "Tamamlandı",
-    CANCELLED = "İptal Edildi",
+    PLANNING = "Planning",
+    IN_PROGRESS = "In Progress",
+    ON_HOLD = "On Hold",
+    COMPLETED = "Completed",
+    CANCELLED = "Cancelled",
   }
+  
+  export const PROJECT_STATUS_LABEL_TR: Record<ProjectStatus, string> = {
+    [ProjectStatus.PLANNING]: "Planlama",
+    [ProjectStatus.IN_PROGRESS]: "Devam Ediyor",
+    [ProjectStatus.ON_HOLD]: "Beklemede",
+    [ProjectStatus.COMPLETED]: "Tamamlandı",
+    [ProjectStatus.CANCELLED]: "İptal Edildi",
+  };
   
   export interface Project {
     _id: string;

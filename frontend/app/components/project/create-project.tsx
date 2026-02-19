@@ -1,5 +1,5 @@
 import { projectSchema } from "@/lib/schema";
-import { ProjectStatus, type MemberProps } from "@/types";
+import { ProjectStatus, PROJECT_STATUS_LABEL_TR, type MemberProps } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -139,15 +139,18 @@ export const CreateProjectDialog = ({
                 <FormItem>
                   <FormLabel>Proje Durumu</FormLabel>
                   <FormControl>
-                    <Select value={field.value} onValueChange={field.onChange}>
+                    <Select
+                      value={field.value}
+                      onValueChange={(v) => field.onChange(v as ProjectStatus)}
+                    >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Proje Durumu Seçin" />
                       </SelectTrigger>
 
                       <SelectContent>
-                        {Object.values(ProjectStatus).map((status) => (
+                        {(Object.values(ProjectStatus) as ProjectStatus[]).map((status) => (
                           <SelectItem key={status} value={status}>
-                            {status}
+                            {PROJECT_STATUS_LABEL_TR[status]}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -157,6 +160,7 @@ export const CreateProjectDialog = ({
                 </FormItem>
               )}
             />
+
 
             <div className="grid grid-cols-2 gap-4">
               <FormField
@@ -340,12 +344,12 @@ export const CreateProjectDialog = ({
                                           selectedMembers.map((m) =>
                                             m.user === member.user._id
                                               ? {
-                                                  ...m,
-                                                  role: role as
-                                                    | "contributor"
-                                                    | "manager"
-                                                    | "viewer",
-                                                }
+                                                ...m,
+                                                role: role as
+                                                  | "contributor"
+                                                  | "manager"
+                                                  | "viewer",
+                                              }
                                               : m
                                           )
                                         );

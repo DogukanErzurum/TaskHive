@@ -14,7 +14,7 @@ const WorkspaceDetails = () => {
   const [isInviteMember, setIsInviteMember] = useState(false);
 
   if (!workspaceId) {
-    return <div>No workspace found</div>;
+    return <div>Çalışma Alanı Bulunamadı</div>;
   }
 
   const { data, isLoading } = useGetWorkspaceQuery(workspaceId) as {
