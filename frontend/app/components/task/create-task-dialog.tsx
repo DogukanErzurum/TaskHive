@@ -73,7 +73,7 @@ import {
         },
         {
           onSuccess: () => {
-            toast.success("Task created successfully");
+            toast.success("Görev başarıyla oluşturuldu");
             form.reset();
             onOpenChange(false);
           },
@@ -90,7 +90,7 @@ import {
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create Task</DialogTitle>
+            <DialogTitle>Görev Oluştur</DialogTitle>
           </DialogHeader>
   
           <Form {...form}>
@@ -102,9 +102,9 @@ import {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Title</FormLabel>
+                        <FormLabel>Başlık</FormLabel>
                         <FormControl>
-                          <Input {...field} placeholder="Enter task title" />
+                          <Input {...field} placeholder="Görev başlığı girin" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -115,11 +115,11 @@ import {
                     name="description"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel>Açıklama</FormLabel>
                         <FormControl>
                           <Textarea
                             {...field}
-                            placeholder="Enter task description"
+                            placeholder="Görev açıklaması girin"
                           />
                         </FormControl>
                         <FormMessage />
@@ -133,7 +133,7 @@ import {
                       name="status"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Status</FormLabel>
+                          <FormLabel>Durum</FormLabel>
                           <FormControl>
                             <Select
                               onValueChange={field.onChange}
@@ -142,16 +142,16 @@ import {
                               <FormItem>
                                 <FormControl>
                                   <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select status" />
+                                    <SelectValue placeholder="Durum seçin" />
                                   </SelectTrigger>
                                 </FormControl>
   
                                 <SelectContent>
-                                  <SelectItem value="To Do">To Do</SelectItem>
+                                  <SelectItem value="To Do">Yapılacak</SelectItem>
                                   <SelectItem value="In Progress">
-                                    In Progress
+                                    Devam Ediyor
                                   </SelectItem>
-                                  <SelectItem value="Done">Done</SelectItem>
+                                  <SelectItem value="Done">Tamamlandı</SelectItem>
                                 </SelectContent>
                               </FormItem>
                             </Select>
@@ -166,7 +166,7 @@ import {
                       name="priority"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Priority</FormLabel>
+                          <FormLabel>Öncelik</FormLabel>
                           <FormControl>
                             <Select
                               onValueChange={field.onChange}
@@ -180,9 +180,9 @@ import {
                                 </FormControl>
   
                                 <SelectContent>
-                                  <SelectItem value="Low">Low</SelectItem>
-                                  <SelectItem value="Medium">Medium</SelectItem>
-                                  <SelectItem value="High">High</SelectItem>
+                                  <SelectItem value="Low">Düşük</SelectItem>
+                                  <SelectItem value="Medium">Orta</SelectItem>
+                                  <SelectItem value="High">Yüksek</SelectItem>
                                 </SelectContent>
                               </FormItem>
                             </Select>
@@ -198,7 +198,7 @@ import {
                     name="dueDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Due Date</FormLabel>
+                        <FormLabel>Bitiş Tarihi</FormLabel>
                         <FormControl>
                           <Popover modal={true}>
                             <PopoverTrigger asChild>
@@ -213,7 +213,7 @@ import {
                                 {field.value ? (
                                   format(new Date(field.value), "PPPP")
                                 ) : (
-                                  <span>Pick a date</span>
+                                  <span>Bir tarih seçin</span>
                                 )}
                               </Button>
                             </PopoverTrigger>
@@ -246,7 +246,7 @@ import {
   
                       return (
                         <FormItem>
-                          <FormLabel>Assignees</FormLabel>
+                          <FormLabel>Atananlar</FormLabel>
                           <FormControl>
                             <Popover>
                               <PopoverTrigger asChild>
@@ -256,7 +256,7 @@ import {
                                 >
                                   {selectedMembers.length === 0 ? (
                                     <span className="text-muted-foreground">
-                                      Select assignees
+                                      Atananları Seçin
                                     </span>
                                   ) : selectedMembers.length <= 2 ? (
                                     selectedMembers
@@ -326,7 +326,7 @@ import {
   
               <DialogFooter>
                 <Button type="submit" disabled={isPending}>
-                  {isPending ? "Creating..." : "Create Task"}
+                  {isPending ? "Oluşturuluyor..." : "Görev Oluştur"}
                 </Button>
               </DialogFooter>
             </form>

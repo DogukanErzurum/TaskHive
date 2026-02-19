@@ -65,7 +65,7 @@ const ProjectDetails = () => {
 
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="flex items-center gap-2 min-w-32">
-            <div className="text-sm text-muted-foreground">Progress:</div>
+            <div className="text-sm text-muted-foreground">İlerleme:</div>
             <div className="flex-1">
               <Progress value={projectProgress} className="h-2" />
             </div>
@@ -74,7 +74,7 @@ const ProjectDetails = () => {
             </span>
           </div>
 
-          <Button onClick={() => setIsCreateTask(true)}>Add Task</Button>
+          <Button onClick={() => setIsCreateTask(true)}>Görev Ekle</Button>
         </div>
       </div>
 
@@ -83,34 +83,34 @@ const ProjectDetails = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <TabsList>
               <TabsTrigger value="all" onClick={() => setTaskFilter("All")}>
-                All Tasks
+                Tüm Görevler
               </TabsTrigger>
               <TabsTrigger value="todo" onClick={() => setTaskFilter("Yapılacak")}>
-                To Do
+                Yapılacaklar
               </TabsTrigger>
               <TabsTrigger
                 value="in-progress"
                 onClick={() => setTaskFilter("Devam Ediyor")}
               >
-                In Progress
+                Devam Ediyor
               </TabsTrigger>
               <TabsTrigger value="done" onClick={() => setTaskFilter("Tamamlandı")}>
-                Done
+                Tamamlandı
               </TabsTrigger>
             </TabsList>
 
             <div className="flex items-center text-sm">
-              <span className="text-muted-foreground">Status:</span>
+              <span className="text-muted-foreground">Durum:</span>
               <div>
                 <Badge variant="outline" className="bg-background">
-                  {tasks.filter((task) => task.status === "Yapılacak").length} To Do
+                  {tasks.filter((task) => task.status === "Yapılacak").length} Yapılacak
                 </Badge>
                 <Badge variant="outline" className="bg-background">
                   {tasks.filter((task) => task.status === "Devam Ediyor").length}{" "}
-                  In Progress
+                  Devam Ediyor
                 </Badge>
                 <Badge variant="outline" className="bg-background">
-                  {tasks.filter((task) => task.status === "Tamamlandı").length} Done
+                  {tasks.filter((task) => task.status === "Tamamlandı").length} Tamamlandı
                 </Badge>
               </div>
             </div>
@@ -119,19 +119,19 @@ const ProjectDetails = () => {
           <TabsContent value="all" className="m-0">
             <div className="grid grid-cols-3 gap-4">
               <TaskColumn
-                title="To Do"
+                title="Yapılacak"
                 tasks={tasks.filter((task) => task.status === "Yapılacak")}
                 onTaskClick={handleTaskClick}
               />
 
               <TaskColumn
-                title="In Progress"
+                title="Devam Ediyor"
                 tasks={tasks.filter((task) => task.status === "Devam Ediyor")}
                 onTaskClick={handleTaskClick}
               />
 
               <TaskColumn
-                title="Done"
+                title="Tamamlandı"
                 tasks={tasks.filter((task) => task.status === "Tamamlandı")}
                 onTaskClick={handleTaskClick}
               />
@@ -228,7 +228,7 @@ const TaskColumn = ({
         >
           {tasks.length === 0 ? (
             <div className="text-center text-sm text-muted-foreground">
-              No tasks yet
+              Henüz görev yok
             </div>
           ) : (
             tasks.map((task) => (
@@ -258,8 +258,8 @@ const TaskCard = ({ task, onClick }: { task: Task; onClick: () => void }) => {
               task.priority === "Yüksek"
                 ? "bg-red-500 text-white"
                 : task.priority === "Orta"
-                ? "bg-orange-500 text-white"
-                : "bg-slate-500 text-white"
+                  ? "bg-orange-500 text-white"
+                  : "bg-slate-500 text-white"
             }
           >
             {task.priority}
@@ -272,12 +272,12 @@ const TaskCard = ({ task, onClick }: { task: Task; onClick: () => void }) => {
                 size={"icon"}
                 className="size-6"
                 onClick={() => {
-                  console.log("mark as to do");
+                  console.log("Yapılacak olarak işaretle");
                 }}
-                title="Mark as To Do"
+                title="Yapılacak olarak işaretle"
               >
                 <AlertCircle className={cn("size-4")} />
-                <span className="sr-only">Mark as To Do</span>
+                <span className="sr-only">MYapılacak olarak işaretle</span>
               </Button>
             )}
             {task.status !== "Devam Ediyor" && (
@@ -286,12 +286,12 @@ const TaskCard = ({ task, onClick }: { task: Task; onClick: () => void }) => {
                 size={"icon"}
                 className="size-6"
                 onClick={() => {
-                  console.log("mark as in progress");
+                  console.log("Devam ediyor olarak işaretle");
                 }}
-                title="Mark as In Progress"
+                title="Devam ediyor olarak işaretle"
               >
                 <Clock className={cn("size-4")} />
-                <span className="sr-only">Mark as In Progress</span>
+                <span className="sr-only">Devam ediyor olarak işaretle</span>
               </Button>
             )}
             {task.status !== "Tamamlandı" && (
@@ -300,12 +300,12 @@ const TaskCard = ({ task, onClick }: { task: Task; onClick: () => void }) => {
                 size={"icon"}
                 className="size-6"
                 onClick={() => {
-                  console.log("mark as done");
+                  console.log("Tamamlandı olarak işaretle");
                 }}
-                title="Mark as Done"
+                title="Tamamlandı olarak işaretle"
               >
                 <CheckCircle className={cn("size-4")} />
-                <span className="sr-only">Mark as Done</span>
+                <span className="sr-only">Tamamlandı olarak işaretle</span>
               </Button>
             )}
           </div>
@@ -356,7 +356,7 @@ const TaskCard = ({ task, onClick }: { task: Task; onClick: () => void }) => {
         {task.subtasks && task.subtasks.length > 0 && (
           <div className="mt-2 text-xs text-muted-foreground">
             {task.subtasks.filter((subtask) => subtask.completed).length} /{" "}
-            {task.subtasks.length} subtasks
+            {task.subtasks.length} alt görev
           </div>
         )}
       </CardContent>
