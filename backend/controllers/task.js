@@ -15,7 +15,7 @@ const createTask = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -23,7 +23,7 @@ const createTask = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -33,7 +33,7 @@ const createTask = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this workspace",
+        message: "Bu çalışma alanının üyesi değilsiniz",
       });
     }
 
@@ -55,7 +55,7 @@ const createTask = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -70,7 +70,7 @@ const getTaskById = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -83,7 +83,7 @@ const getTaskById = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -97,7 +97,7 @@ const updateTaskTitle = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -105,7 +105,7 @@ const updateTaskTitle = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -115,7 +115,7 @@ const updateTaskTitle = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -126,14 +126,14 @@ const updateTaskTitle = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `updated task title from ${oldTitle} to ${title}`,
+      description: `Görev başlığı "${oldTitle}" değerinden "${title}" değerine güncellendi`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -146,7 +146,7 @@ const updateTaskDescription = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -154,7 +154,7 @@ const updateTaskDescription = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -164,7 +164,7 @@ const updateTaskDescription = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -179,14 +179,14 @@ const updateTaskDescription = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `updated task description from ${oldDescription} to ${newDescription}`,
+      description: `Görev açıklaması "${oldDescription}" değerinden "${newDescription}" değerine güncellendi`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -200,7 +200,7 @@ const updateTaskStatus = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -208,7 +208,7 @@ const updateTaskStatus = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -218,7 +218,7 @@ const updateTaskStatus = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -229,14 +229,14 @@ const updateTaskStatus = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `updated task status from ${oldStatus} to ${status}`,
+      description: `Görev durumu "${oldStatus}" değerinden "${status}" değerine güncellendi`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -249,7 +249,7 @@ const updateTaskAssignees = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -257,7 +257,7 @@ const updateTaskAssignees = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -267,7 +267,7 @@ const updateTaskAssignees = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -278,14 +278,14 @@ const updateTaskAssignees = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `updated task assignees from ${oldAssignees.length} to ${assignees.length}`,
+      description: `Göreve atanan kişi sayısı ${oldAssignees.length} değerinden ${assignees.length} değerine güncellendi`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -298,7 +298,7 @@ const updateTaskPriority = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -306,7 +306,7 @@ const updateTaskPriority = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -316,7 +316,7 @@ const updateTaskPriority = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -327,14 +327,14 @@ const updateTaskPriority = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `updated task priority from ${oldPriority} to ${priority}`,
+      description: `Görev önceliği "${oldPriority}" değerinden "${priority}" değerine güncellendi`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -348,7 +348,7 @@ const addSubTask = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -356,7 +356,7 @@ const addSubTask = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -366,7 +366,7 @@ const addSubTask = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -380,7 +380,7 @@ const addSubTask = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "created_subtask", "Task", taskId, {
-      description: `created subtask ${title}`,
+      description: `Alt görev oluşturuldu: ${title}`,
     });
 
     res.status(201).json(task);
@@ -388,7 +388,7 @@ const addSubTask = async (req, res) => {
     console.log(error);
 
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -402,7 +402,7 @@ const updateSubTask = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -412,7 +412,7 @@ const updateSubTask = async (req, res) => {
 
     if (!subTask) {
       return res.status(404).json({
-        message: "Subtask not found",
+        message: "Alt görev bulunamadı",
       });
     }
 
@@ -421,14 +421,14 @@ const updateSubTask = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_subtask", "Task", taskId, {
-      description: `updated subtask ${subTask.title}`,
+      description: `Alt görev güncellendi: ${subTask.title}`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -445,7 +445,7 @@ const getActivityByResourceId = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -462,7 +462,7 @@ const getCommentsByTaskId = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -476,7 +476,7 @@ const addComment = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -484,7 +484,7 @@ const addComment = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -494,7 +494,7 @@ const addComment = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -509,7 +509,7 @@ const addComment = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "added_comment", "Task", taskId, {
-      description: `added comment ${
+      description: `Yorum eklendi: ${
         text.substring(0, 50) + (text.length > 50 ? "..." : "")
       }`,
     });
@@ -518,7 +518,7 @@ const addComment = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -531,7 +531,7 @@ const watchTask = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -539,7 +539,7 @@ const watchTask = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -549,7 +549,7 @@ const watchTask = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
 
@@ -568,15 +568,15 @@ const watchTask = async (req, res) => {
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
       description: `${
-        isWatching ? "stopped watching" : "started watching"
-      } task ${task.title}`,
+        isWatching ? "Takip etmeyi bıraktı" : "Takip etmeye başladı"
+      } görev ${task.title}`,
     });
 
     res.status(200).json(task);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -589,7 +589,7 @@ const achievedTask = async (req, res) => {
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Görev bulunamadı",
       });
     }
 
@@ -597,7 +597,7 @@ const achievedTask = async (req, res) => {
 
     if (!project) {
       return res.status(404).json({
-        message: "Project not found",
+        message: "Proje bulunamadı",
       });
     }
 
@@ -607,7 +607,7 @@ const achievedTask = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this project",
+        message: "Bu projenin üyesi değilsiniz",
       });
     }
     const isAchieved = task.isArchived;
@@ -617,7 +617,7 @@ const achievedTask = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `${isAchieved ? "unachieved" : "achieved"} task ${
+      description: `${isAchieved ? "Arşivden çıkarıldı" : "Arşivlendi"} Görev ${
         task.title
       }`,
     });
@@ -627,7 +627,7 @@ const achievedTask = async (req, res) => {
     console.log(error);
 
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -642,7 +642,7 @@ const getMyTasks = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
