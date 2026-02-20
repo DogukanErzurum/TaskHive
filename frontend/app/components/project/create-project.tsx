@@ -3,6 +3,7 @@ import { ProjectStatus, PROJECT_STATUS_LABEL_TR, type MemberProps } from "@/type
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { tr } from "date-fns/locale";
 import {
   Dialog,
   DialogContent,
@@ -181,7 +182,7 @@ export const CreateProjectDialog = ({
                           >
                             <CalendarIcon className="size-4 mr-2" />
                             {field.value ? (
-                              format(new Date(field.value), "PPPP")
+                              format(new Date(field.value), "PPPP", { locale: tr })
                             ) : (
                               <span>Tarih seçin</span>
                             )}
@@ -223,7 +224,7 @@ export const CreateProjectDialog = ({
                           >
                             <CalendarIcon className="size-4 mr-2" />
                             {field.value ? (
-                              format(new Date(field.value), "PPPP")
+                              format(new Date(field.value), "PPPP", { locale: tr })
                             ) : (
                               <span>Tarih seçin</span>
                             )}

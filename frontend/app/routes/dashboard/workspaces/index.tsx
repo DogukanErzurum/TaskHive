@@ -1,6 +1,7 @@
 import { Loader } from "@/components/loader";
 import { NoDataFound } from "@/components/no-data-found";
 import { Button } from "@/components/ui/button";
+import { tr } from "date-fns/locale";
 import {
   Card,
   CardContent,
@@ -76,7 +77,7 @@ const WorkspaceCard = ({ workspace }: { workspace: Workspace }) => {
               <div>
                 <CardTitle>{workspace.name}</CardTitle>
                 <span className="text-xs text-muted-foreground">
-                  Oluşturulma tarihi {format(workspace.createdAt, "MMM d, yyyy h:mm a")}
+                  Oluşturulma tarihi {format(new Date(workspace.createdAt), "d MMMM yyyy HH:mm", { locale: tr })}
                 </span>
               </div>
             </div>

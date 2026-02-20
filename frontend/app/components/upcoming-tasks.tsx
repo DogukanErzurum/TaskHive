@@ -1,4 +1,5 @@
 import type { Task } from "@/types";
+import { tr } from "date-fns/locale";
 import { Link, useSearchParams } from "react-router";
 import {
   Card,
@@ -57,7 +58,7 @@ export const UpcomingTasks = ({ data }: { data: Task[] }) => {
                     <>
                       <span className="mx-1"> - </span>
                       <span>
-                        {format(new Date(task.dueDate), "MMM d, yyyy")}
+                      {format(new Date(task.dueDate), "d MMMM yyyy", { locale: tr })}
                       </span>
                     </>
                   )}

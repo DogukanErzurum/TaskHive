@@ -16,6 +16,7 @@ import { AlertCircle, Calendar, CheckCircle, Clock } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { TASK_PRIORITY_LABEL_TR } from "@/types";
+import { tr } from "date-fns/locale";
 
 const ProjectDetails = () => {
   const { projectId, workspaceId } = useParams<{
@@ -349,7 +350,7 @@ const TaskCard = ({ task, onClick }: { task: Task; onClick: () => void }) => {
           {task.dueDate && (
             <div className="text-xs text-muted-foreground flex items-center">
               <Calendar className="size-3 mr-1" />
-              {format(new Date(task.dueDate), "MMM d, yyyy")}
+              {format(new Date(task.dueDate), "d MMMM yyyy", { locale: tr })}
             </div>
           )}
         </div>

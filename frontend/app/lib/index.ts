@@ -31,7 +31,7 @@ export const getTaskStatusColor = (status: ProjectStatus) => {
 export const getProjectProgress = (tasks: { status: TaskStatus }[]) => {
   const totalTasks = tasks.length;
 
-  const completedTasks = tasks.filter((task) => task?.status === "Tamamlandı").length;
+  const completedTasks = tasks.filter((task) => task?.status === "Done").length;
 
   const progress =
     totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;

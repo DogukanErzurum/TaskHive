@@ -17,6 +17,7 @@ import {
   import { Button } from "../ui/button";
   import { Calendar } from "../ui/calendar";
   import { Checkbox } from "../ui/checkbox";
+  import { tr } from "date-fns/locale";
   import {
     Form,
     FormControl,
@@ -211,7 +212,7 @@ import {
                               >
                                 <CalendarIcon className="size-4 mr-2" />
                                 {field.value ? (
-                                  format(new Date(field.value), "PPPP")
+                                  format(new Date(field.value), "PPPP", { locale: tr })
                                 ) : (
                                   <span>Bir tarih seçin</span>
                                 )}

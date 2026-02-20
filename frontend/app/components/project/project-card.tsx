@@ -1,4 +1,6 @@
 import type { Project } from "@/types";
+import { PROJECT_STATUS_LABEL_TR } from "@/types";
+import { tr } from "date-fns/locale";
 import { Link } from "react-router";
 import {
   Card,
@@ -36,7 +38,7 @@ export const ProjectCard = ({
                 getTaskStatusColor(project.status)
               )}
             >
-              {project.status}
+              {PROJECT_STATUS_LABEL_TR[project.status] ?? project.status}
             </span>
           </div>
           <CardDescription className="line-clamp-2">
@@ -63,7 +65,7 @@ export const ProjectCard = ({
               {project.dueDate && (
                 <div className="flex items-center text-xs text-muted-foreground">
                   <CalendarDays className="w-4 h-4" />
-                  <span>{format(project.dueDate, "MMM d, yyyy")}</span>
+                  <span>{format(new Date(project.dueDate), "d MMMM yyyy", { locale: tr })}</span>
                 </div>
               )}
             </div>

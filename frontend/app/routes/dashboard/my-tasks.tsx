@@ -1,6 +1,8 @@
 import { Loader } from "@/components/loader";
+import { tr } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { TASK_STATUS_LABEL_TR, TASK_PRIORITY_LABEL_TR } from "@/types";
 import {
   Card,
   CardContent,
@@ -71,21 +73,21 @@ const MyTasks = () => {
   const filteredTasks =
     myTasks?.length > 0
       ? myTasks
-          .filter((task) => {
-            if (filter === "all") return true;
-            if (filter === "todo") return task.status === "Yapılacak";
-            if (filter === "inprogress") return task.status === "Devam Ediyor";
-            if (filter === "done") return task.status === "Tamamlandı";
-            if (filter === "achieved") return task.isArchived === true;
-            if (filter === "high") return task.priority === "Yüksek";
+        .filter((task) => {
+          if (filter === "all") return true;
+          if (filter === "todo") return task.status === "To Do";
+          if (filter === "inprogress") return task.status === "In Progress";
+          if (filter === "done") return task.status === "Done";
+          if (filter === "achieved") return task.isArchived === true;
+          if (filter === "high") return task.priority === "High";
 
-            return true;
-          })
-          .filter(
-            (task) =>
-              task.title.toLowerCase().includes(search.toLowerCase()) ||
-              task.description?.toLowerCase().includes(search.toLowerCase())
-          )
+          return true;
+        })
+        .filter(
+          (task) =>
+            task.title.toLowerCase().includes(search.toLowerCase()) ||
+            task.description?.toLowerCase().includes(search.toLowerCase())
+        )
       : [];
 
   //   sort task
@@ -98,11 +100,11 @@ const MyTasks = () => {
     return 0;
   });
 
-  const todoTasks = sortedTasks.filter((task) => task.status === "Yapılacak");
+  const todoTasks = sortedTasks.filter((task) => task.status === "To Do");
   const inProgressTasks = sortedTasks.filter(
-    (task) => task.status === "Devam Ediyor"
+    (task) => task.status === "In Progress"
   );
-  const doneTasks = sortedTasks.filter((task) => task.status === "Tamamlandı");
+  const doneTasks = sortedTasks.filter((task) => task.status === "Done");
 
   if (isLoading)
     return (
@@ -113,7 +115,7 @@ const MyTasks = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-start md:items-center justify-between">
-        <h1 className="text-2xl font-bold">My Tasks</h1>
+        <h1 className="text-2xl font-bold">Görevlerim</h1>
 
         <div
           className="flex flex-col items-start md:flex-row md"
@@ -126,36 +128,36 @@ const MyTasks = () => {
               setSortDirection(sortDirection === "asc" ? "desc" : "asc")
             }
           >
-            {sortDirection === "asc" ? "Oldest First" : "Newest First"}
+            {sortDirection === "asc" ? "En Eski" : "En Yeni"}
           </Button>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant={"outline"}>
-                <FilterIcon className="w-4 h-4" /> Filter
+                <FilterIcon className="w-4 h-4" /> Filtrele
               </Button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-              <DropdownMenuLabel>Filter Tasks</DropdownMenuLabel>
+              <DropdownMenuLabel>Görevleri Filtrele</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => setFilter("all")}>
-                All Tasks
+                Tüm Görevler
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setFilter("todo")}>
-                To Do
+                Yapılacak
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setFilter("inprogress")}>
-                In Progress
+                Devam Ediyor
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setFilter("done")}>
-                Done
+                Tamamlandı
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setFilter("achieved")}>
-                Achieved
+                Arşivdekiler
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setFilter("high")}>
-                High
+                Yüksek Öncelik
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -163,7 +165,7 @@ const MyTasks = () => {
       </div>
 
       <Input
-        placeholder="Search tasks ...."
+        placeholder="Görevlerde ara..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="max-w-md"
@@ -171,17 +173,17 @@ const MyTasks = () => {
 
       <Tabs defaultValue="list">
         <TabsList>
-          <TabsTrigger value="list">List View</TabsTrigger>
-          <TabsTrigger value="board">Board View</TabsTrigger>
+          <TabsTrigger value="list">Liste Görünümü</TabsTrigger>
+          <TabsTrigger value="board">Pano Görünümü</TabsTrigger>
         </TabsList>
 
         {/* LIST VIEW */}
         <TabsContent value="list">
           <Card>
             <CardHeader>
-              <CardTitle>My Tasks</CardTitle>
+              <CardTitle>Görevlerim</CardTitle>
               <CardDescription>
-                {sortedTasks?.length} tasks assigned to you
+                {sortedTasks?.length} görev size atandı
               </CardDescription>
             </CardHeader>
 
@@ -192,7 +194,7 @@ const MyTasks = () => {
                     <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-3">
                       <div className="flex">
                         <div className="flex gap-2 mr-2">
-                          {task.status === "Tamamlandı" ? (
+                          {task.status === "Done" ? (
                             <CheckCircle className="size-4 text-green-500" />
                           ) : (
                             <Clock className="size-4 text-yellow-500" />
@@ -210,26 +212,26 @@ const MyTasks = () => {
                           <div className="flex items-center space-x-2 mt-1">
                             <Badge
                               variant={
-                                task.status === "Tamamlandı" ? "default" : "outline"
+                                task.status === "Done" ? "default" : "outline"
                               }
                             >
-                              {task.status}
+                              {TASK_STATUS_LABEL_TR[task.status] ?? task.status}
                             </Badge>
 
                             {task.priority && (
                               <Badge
                                 variant={
-                                  task.priority === "Yüksek"
+                                  task.priority === "High"
                                     ? "destructive"
                                     : "secondary"
                                 }
                               >
-                                {task.priority}
+                                {TASK_PRIORITY_LABEL_TR[task.priority] ?? task.priority}
                               </Badge>
                             )}
 
                             {task.isArchived && (
-                              <Badge variant={"outline"}>Archived</Badge>
+                              <Badge variant={"outline"}>Arşivde</Badge>
                             )}
                           </div>
                         </div>
@@ -237,17 +239,17 @@ const MyTasks = () => {
 
                       <div className="text-sm text-muted-foreground space-y-1">
                         {task.dueDate && (
-                          <div>Due: {format(task.dueDate, "PPPP")}</div>
+                          <div>Bitiş: {format(new Date(task.dueDate), "PPPP", { locale: tr })}</div>
                         )}
 
                         <div>
-                          Project:{" "}
+                          Proje:{" "}
                           <span className="font-medium">
                             {task.project.title}
                           </span>
                         </div>
 
-                        <div>Modified on: {format(task.updatedAt, "PPPP")}</div>
+                        <div>Güncellendi: {format(new Date(task.updatedAt), "PPPP", { locale: tr })}</div>
                       </div>
                     </div>
                   </div>
@@ -255,7 +257,7 @@ const MyTasks = () => {
 
                 {sortedTasks?.length === 0 && (
                   <div className="p-4 text-center text-sm text-muted-foreground">
-                    No tasks found
+                    Görev bulunmadı
                   </div>
                 )}
               </div>
@@ -269,7 +271,7 @@ const MyTasks = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  To Do
+                  Yapılacak
                   <Badge variant={"outline"}>{todoTasks?.length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -292,17 +294,17 @@ const MyTasks = () => {
                       <div className="flex items-center mt-2 gap-2">
                         <Badge
                           variant={
-                            task.priority === "Yüksek"
+                            task.priority === "High"
                               ? "destructive"
                               : "secondary"
                           }
                         >
-                          {task.priority}
+                          {TASK_PRIORITY_LABEL_TR[task.priority] ?? task.priority}
                         </Badge>
 
                         {task.dueDate && (
                           <span className="text-sm text-muted-foreground">
-                            {format(task.dueDate, "PPPP")}
+                            {format(new Date(task.dueDate), "PPPP", { locale: tr })}
                           </span>
                         )}
                       </div>
@@ -312,7 +314,7 @@ const MyTasks = () => {
 
                 {todoTasks?.length === 0 && (
                   <div className="p-4 text-center text-sm text-muted-foreground">
-                    No tasks found
+                    Görev bulunamadı
                   </div>
                 )}
               </CardContent>
@@ -321,7 +323,7 @@ const MyTasks = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  In Progress
+                  Devam Ediyor
                   <Badge variant={"outline"}>{inProgressTasks?.length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -344,17 +346,17 @@ const MyTasks = () => {
                       <div className="flex items-center mt-2 gap-2">
                         <Badge
                           variant={
-                            task.priority === "Yüksek"
+                            task.priority === "High"
                               ? "destructive"
                               : "secondary"
                           }
                         >
-                          {task.priority}
+                          {TASK_PRIORITY_LABEL_TR[task.priority] ?? task.priority}
                         </Badge>
 
                         {task.dueDate && (
                           <span className="text-sm text-muted-foreground">
-                            {format(task.dueDate, "PPPP")}
+                            {format(new Date(task.dueDate), "PPPP", { locale: tr })}
                           </span>
                         )}
                       </div>
@@ -364,7 +366,7 @@ const MyTasks = () => {
 
                 {inProgressTasks?.length === 0 && (
                   <div className="p-4 text-center text-sm text-muted-foreground">
-                    No tasks found
+                    Görev bulunmadı.
                   </div>
                 )}
               </CardContent>
@@ -373,7 +375,7 @@ const MyTasks = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  Done
+                  Tamamlandı
                   <Badge variant={"outline"}>{doneTasks?.length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -396,17 +398,17 @@ const MyTasks = () => {
                       <div className="flex items-center mt-2 gap-2">
                         <Badge
                           variant={
-                            task.priority === "Yüksek"
+                            task.priority === "High"
                               ? "destructive"
                               : "secondary"
                           }
                         >
-                          {task.priority}
+                          {TASK_PRIORITY_LABEL_TR[task.priority] ?? task.priority}
                         </Badge>
 
                         {task.dueDate && (
                           <span className="text-sm text-muted-foreground">
-                            {format(task.dueDate, "PPPP")}
+                            {format(new Date(task.dueDate), "PPPP", { locale: tr })}
                           </span>
                         )}
                       </div>
@@ -416,7 +418,7 @@ const MyTasks = () => {
 
                 {doneTasks?.length === 0 && (
                   <div className="p-4 text-center text-sm text-muted-foreground">
-                    No tasks found
+                    Görev bulunamadı
                   </div>
                 )}
               </CardContent>
