@@ -36,7 +36,7 @@ export const CommentSection = ({
       {
         onSuccess: () => {
           setNewComment("");
-          toast.success("Comment added successfully");
+          toast.success("Yorum başarıyla eklendi");
         },
         onError: (error: any) => {
           toast.error(error.response.data.message);
@@ -55,7 +55,7 @@ export const CommentSection = ({
 
   return (
     <div className="bg-card rounded-lg p-6 shadow-sm">
-      <h3 className="text-lg font-medium mb-4">Comments</h3>
+      <h3 className="text-lg font-medium mb-4">Yorumlar</h3>
 
       <ScrollArea className="h-[300px] mb-4">
         {comments?.length > 0 ? (
@@ -85,7 +85,7 @@ export const CommentSection = ({
           ))
         ) : (
           <div className="flex items-center justify-center py-8">
-            <p className="text-sm text-muted-foreground">No comment yet</p>
+            <p className="text-sm text-muted-foreground">Henüz yorum yok</p>
           </div>
         )}
       </ScrollArea>
@@ -94,7 +94,7 @@ export const CommentSection = ({
 
       <div className="mt-4">
         <Textarea
-          placeholder="Add a comment"
+          placeholder="Yorum ekle"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
@@ -104,7 +104,7 @@ export const CommentSection = ({
             disabled={!newComment.trim() || isPending}
             onClick={handleAddComment}
           >
-            Post Comment
+            Yorum Gönder
           </Button>
         </div>
       </div>
