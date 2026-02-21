@@ -27,7 +27,7 @@ export const SubTasksDetails = ({
       { taskId, subTaskId, completed: checked },
       {
         onSuccess: () => {
-          toast.success("Sub task updated successfully");
+          toast.success("Alt görev başarıyla güncellendi");
         },
         onError: (error: any) => {
           const errMessage = error.response.data.message;
@@ -44,7 +44,7 @@ export const SubTasksDetails = ({
       {
         onSuccess: () => {
           setNewSubTask("");
-          toast.success("Sub task added successfully");
+          toast.success("Alt görev başarıyla eklendi");
         },
         onError: (error: any) => {
           const errMessage = error.response.data.message;
@@ -85,13 +85,13 @@ export const SubTasksDetails = ({
             </div>
           ))
         ) : (
-          <div className="text-sm text-muted-foreground">No sub tasks</div>
+          <div className="text-sm text-muted-foreground">Alt görev bulunmuyor</div>
         )}
       </div>
 
       <div className="flex ">
         <Input
-          placeholder="Add a sub task"
+          placeholder="Alt görev ekle"
           value={newSubTask}
           onChange={(e) => setNewSubTask(e.target.value)}
           className="mr-1"
@@ -102,7 +102,7 @@ export const SubTasksDetails = ({
           onClick={handleAddSubTask}
           disabled={isPending || newSubTask.length === 0}
         >
-          Add
+          Ekle
         </Button>
       </div>
     </div>
