@@ -4,6 +4,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { tr } from "date-fns/locale";
 import {
   useAddCommentMutation,
   useGetCommentsByTaskIdQuery,
@@ -75,6 +76,7 @@ export const CommentSection = ({
                   <span className="text-xs text-muted-foreground">
                     {formatDistanceToNow(comment.createdAt, {
                       addSuffix: true,
+                      locale: tr,
                     })}
                   </span>
                 </div>
