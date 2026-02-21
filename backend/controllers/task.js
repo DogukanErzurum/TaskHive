@@ -139,7 +139,7 @@ const updateTaskTitle = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `Görev başlığı "${oldTitle}" değerinden "${title}" değerine güncellendi`,
+      description: `Görev başlığı "${oldTitle}" iken "${title}" olarak güncellendi`,
     });
 
     res.status(200).json(task);
@@ -192,7 +192,7 @@ const updateTaskDescription = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `Görev açıklaması "${oldDescription}" değerinden "${newDescription}" değerine güncellendi`,
+      description: `Görev açıklaması "${oldDescription}" iken "${newDescription}" olarak güncellendi`,
     });
 
     res.status(200).json(task);
@@ -242,7 +242,7 @@ const updateTaskStatus = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `Görev durumu "${TASK_STATUS_LABEL_TR[oldStatus]}" değerinden "${TASK_STATUS_LABEL_TR[status]}" değerine güncellendi`,
+      description: `Görev durumu "${TASK_STATUS_LABEL_TR[oldStatus]}" iken "${TASK_STATUS_LABEL_TR[status]}" olarak güncellendi`,
     });
 
     res.status(200).json(task);
@@ -291,7 +291,7 @@ const updateTaskAssignees = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `Göreve atanan kişi sayısı ${oldAssignees.length} değerinden ${assignees.length} değerine güncellendi`,
+      description: `Göreve atanan kişi sayısı ${oldAssignees.length} kişiden ${assignees.length} kişiye değiştirildi`,
     });
 
     res.status(200).json(task);

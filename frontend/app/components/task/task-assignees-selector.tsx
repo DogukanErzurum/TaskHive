@@ -53,11 +53,11 @@ export const TaskAssigneesSelector = ({
       {
         onSuccess: () => {
           setDropDownOpen(false);
-          toast.success("Assignees updated successfully");
+          toast.success("Atanan kişiler başarıyla güncellendi.");
         },
         onError: (error: any) => {
           const errMessage =
-            error.response?.data?.message || "Failed to update assignees";
+            error.response?.data?.message || "Atanan kişilerin güncellenmesi başarısız oldu.";
           toast.error(errMessage);
           console.log(error);
         },
@@ -68,12 +68,12 @@ export const TaskAssigneesSelector = ({
   return (
     <div className="mb-6">
       <h3 className="text-sm font-medium text-muted-foreground mb-2">
-        Assignees
+        Atananlar
       </h3>
 
       <div className="flex flex-wrap gap-2 mb-2">
         {selectedIds.length === 0 ? (
-          <span className="text-xs text-muted-foreground">Unassigned</span>
+          <span className="text-xs text-muted-foreground">Atanmamış</span>
         ) : (
           projectMembers
             .filter((member) => selectedIds.includes(member.user._id))
@@ -101,8 +101,8 @@ export const TaskAssigneesSelector = ({
           onClick={() => setDropDownOpen(!dropDownOpen)}
         >
           {selectedIds.length === 0
-            ? "Select assignees"
-            : `${selectedIds.length} selected`}
+            ? "Atanacak Kişileri Seçin"
+            : `${selectedIds.length} Kişi Seçildi`}
         </button>
 
         {dropDownOpen && (
@@ -112,13 +112,13 @@ export const TaskAssigneesSelector = ({
                 className="text-xs text-blue-600"
                 onClick={handleSelectAll}
               >
-                Select all
+                Hepsini Seç
               </button>
               <button
                 className="text-xs text-red-600"
                 onClick={handleUnSelectAll}
               >
-                Unselect all
+                Tüm Seçimi Kaldır
               </button>
             </div>
 
@@ -150,7 +150,7 @@ export const TaskAssigneesSelector = ({
                 onClickCapture={() => setDropDownOpen(false)}
                 disabled={isPending}
               >
-                Cancel
+                İptal
               </Button>
               <Button
                 size={"sm"}
@@ -158,7 +158,7 @@ export const TaskAssigneesSelector = ({
                 disabled={isPending}
                 onClickCapture={() => handleSave()}
               >
-                Save
+                Kaydet
               </Button>
             </div>
           </div>

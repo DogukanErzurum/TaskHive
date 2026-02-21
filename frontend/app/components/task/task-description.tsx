@@ -22,7 +22,7 @@ export const TaskDescription = ({
       {
         onSuccess: () => {
           setIsEditing(false);
-          toast.success("Description updated successfully");
+          toast.success("Açıklama başarıyla güncellendi");
         },
         onError: (error: any) => {
           const errorMessage = error.response.data.message;
