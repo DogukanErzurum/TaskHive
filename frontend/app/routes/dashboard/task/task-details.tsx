@@ -11,13 +11,14 @@ import { TaskTitle } from "@/components/task/task-title";
 import { Watchers } from "@/components/task/watchers";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { tr } from "date-fns/locale";
 import {
   useAchievedTaskMutation,
   useTaskByIdQuery,
   useWatchTaskMutation,
 } from "@/hooks/use-task";
 import { useAuth } from "@/provider/auth-context";
-import type { Project, Task } from "@/types";
+import { TASK_PRIORITY_LABEL_TR, type Project, type Task } from "@/types";
 import { format, formatDistanceToNow } from "date-fns";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
@@ -54,7 +55,7 @@ const TaskDetails = () => {
   if (!data) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="text-2xl font-bold">Task not found</div>
+        <div className="text-2xl font-bold">Görev bulunmadı</div>
       </div>
     );
   }
@@ -73,10 +74,10 @@ const TaskDetails = () => {
       { taskId: task._id },
       {
         onSuccess: () => {
-          toast.success("Task watched");
+          toast.success("Görev izleme durumu değiştirildi.");
         },
         onError: () => {
-          toast.error("Failed to watch task");
+          toast.error("Görev izleme durumu değiştirilemedi.");
         },
       }
     );
@@ -87,10 +88,10 @@ const TaskDetails = () => {
       { taskId: task._id },
       {
         onSuccess: () => {
-          toast.success("Task achieved");
+          toast.success("Görev değişikliği yapıldı");
         },
         onError: () => {
-          toast.error("Failed to achieve task");
+          toast.error("Görev değişikliği yapılamadı");
         },
       }
     );
@@ -106,7 +107,7 @@ const TaskDetails = () => {
 
           {task.isArchived && (
             <Badge className="ml-2" variant={"outline"}>
-              Archived
+              Tamamlandı
             </Badge>
           )}
         </div>
@@ -122,12 +123,12 @@ const TaskDetails = () => {
             {isUserWatching ? (
               <>
                 <EyeOff className="mr-2 size-4" />
-                Unwatch
+                İzlemeyi bırak
               </>
             ) : (
               <>
                 <Eye className="mr-2 size-4" />
-                Watch
+                İzle
               </>
             )}
           </Button>
@@ -139,7 +140,7 @@ const TaskDetails = () => {
             className="w-fit"
             disabled={isAchieved}
           >
-            {task.isArchived ? "Unarchive" : "Archive"}
+            {task.isArchived ? "Tamamlanmadı" : "Tamamlandı"}
           </Button>
         </div>
       </div>
@@ -151,23 +152,24 @@ const TaskDetails = () => {
               <div>
                 <Badge
                   variant={
-                    task.priority === "Yüksek"
+                    task.priority === "High"
                       ? "destructive"
-                      : task.priority === "Orta"
-                      ? "default"
-                      : "outline"
+                      : task.priority === "Medium"
+                        ? "default"
+                        : "outline"
                   }
                   className="mb-2 capitalize"
                 >
-                  {task.priority} Priority
+                  {TASK_PRIORITY_LABEL_TR[task.priority]} Öncelik
                 </Badge>
 
                 <TaskTitle title={task.title} taskId={task._id} />
 
                 <div className="text-sm md:text-base text-muted-foreground">
-                  Created at:{" "}
+                  Oluşturuldu:{" "}
                   {formatDistanceToNow(new Date(task.createdAt), {
                     addSuffix: true,
+                    locale: tr,
                   })}
                 </div>
               </div>
@@ -178,17 +180,17 @@ const TaskDetails = () => {
                 <Button
                   variant={"destructive"}
                   size="sm"
-                  onClick={() => {}}
+                  onClick={() => { }}
                   className="hidden md:block"
                 >
-                  Delete Task
+                  Görevi Sil
                 </Button>
               </div>
             </div>
 
             <div className="mb-6">
               <h3 className="text-sm font-medium text-muted-foreground mb-0">
-                Description
+                Açıklama
               </h3>
 
               <TaskDescription

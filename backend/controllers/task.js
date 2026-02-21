@@ -5,6 +5,19 @@ import Project from "../models/project.js";
 import Task from "../models/task.js";
 import Workspace from "../models/workspace.js";
 
+const TASK_STATUS_LABEL_TR = {
+  "To Do": "Yapılacak",
+  "In Progress": "Devam Ediyor",
+  Review: "İncelemede",
+  Done: "Tamamlandı",
+};
+
+const TASK_PRIORITY_LABEL_TR = {
+  Low: "Düşük",
+  Medium: "Orta",
+  High: "Yüksek",
+};
+
 const createTask = async (req, res) => {
   try {
     const { projectId } = req.params;
@@ -229,7 +242,7 @@ const updateTaskStatus = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `Görev durumu "${oldStatus}" değerinden "${status}" değerine güncellendi`,
+      description: `Görev durumu "${TASK_STATUS_LABEL_TR[oldStatus]}" değerinden "${TASK_STATUS_LABEL_TR[status]}" değerine güncellendi`,
     });
 
     res.status(200).json(task);
@@ -327,7 +340,7 @@ const updateTaskPriority = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `Görev önceliği "${oldPriority}" değerinden "${priority}" değerine güncellendi`,
+      description: `Görev önceliği "${ TASK_PRIORITY_LABEL_TR[oldPriority] ?? oldPriority }" seviyesinden "${TASK_PRIORITY_LABEL_TR[priority] ?? priority}" seviyesine güncellendi`,
     });
 
     res.status(200).json(task);
@@ -617,7 +630,7 @@ const achievedTask = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `${isAchieved ? "Arşivden çıkarıldı" : "Arşivlendi"} Görev ${
+      description: `${isAchieved ? "Tamamlanmadı" : "Tamamlandı"} Görev ${
         task.title
       }`,
     });

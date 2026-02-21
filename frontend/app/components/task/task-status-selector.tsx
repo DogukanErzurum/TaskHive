@@ -23,7 +23,7 @@ export const TaskStatusSelector = ({
       { taskId, status: value as TaskStatus },
       {
         onSuccess: () => {
-          toast.success("Status updated successfully");
+          toast.success("Durum başarıyla güncellendi");
         },
         onError: (error: any) => {
           const errorMessage = error.response.data.message;
@@ -40,9 +40,9 @@ export const TaskStatusSelector = ({
       </SelectTrigger>
 
       <SelectContent>
-        <SelectItem value="To Do">To Do</SelectItem>
-        <SelectItem value="In Progress">In Progress</SelectItem>
-        <SelectItem value="Done">Done</SelectItem>
+        <SelectItem value="To Do">Yapılacak</SelectItem>
+        <SelectItem value="In Progress">Devam Ediyor</SelectItem>
+        <SelectItem value="Done">Tamamlandı</SelectItem>
       </SelectContent>
     </Select>
   );

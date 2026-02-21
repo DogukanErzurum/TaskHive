@@ -26,7 +26,7 @@ export const TaskPrioritySelector = ({
       { taskId, priority: value as TaskPriority },
       {
         onSuccess: () => {
-          toast.success("Priority updated successfully");
+          toast.success("Öncelik başarıyla güncellendi");
         },
         onError: (error: any) => {
           const errorMessage = error.response.data.message;
@@ -43,9 +43,9 @@ export const TaskPrioritySelector = ({
       </SelectTrigger>
 
       <SelectContent>
-        <SelectItem value="Low">Low</SelectItem>
-        <SelectItem value="Medium">Medium</SelectItem>
-        <SelectItem value="High">High</SelectItem>
+        <SelectItem value="Low">Düşük</SelectItem>
+        <SelectItem value="Medium">Orta</SelectItem>
+        <SelectItem value="High">Yüksek</SelectItem>
       </SelectContent>
     </Select>
   );

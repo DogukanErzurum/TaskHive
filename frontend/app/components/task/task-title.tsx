@@ -21,7 +21,7 @@ export const TaskTitle = ({
       {
         onSuccess: () => {
           setIsEditing(false);
-          toast.success("Title updated successfully");
+          toast.success("Başlık başarıyla güncellendi");
         },
         onError: (error: any) => {
           const errorMessage = error.response.data.message;
