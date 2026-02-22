@@ -192,13 +192,15 @@ export interface TaskTrendsData {
 }
 
 export interface TaskPriorityData {
-  name: string;
+  key?: TaskPriority;   // "High" | "Medium" | "Low"
+  name: string;         // "Yüksek" | "Orta" | "Düşük"
   value: number;
   color: string;
 }
 
 export interface ProjectStatusData {
-  name: string;
+  key?: ProjectStatus;  // "Planning" | "In Progress" | ...
+  name: string;         // "Planlama" | "Devam Ediyor" | ...
   value: number;
   color: string;
 }

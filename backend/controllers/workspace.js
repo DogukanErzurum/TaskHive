@@ -28,7 +28,7 @@ const createWorkspace = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -43,7 +43,7 @@ const getWorkspaces = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -58,7 +58,7 @@ const getWorkspaceDetails = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -77,7 +77,7 @@ const getWorkspaceProjects = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -93,7 +93,7 @@ const getWorkspaceProjects = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -106,7 +106,7 @@ const getWorkspaceStats = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -116,7 +116,7 @@ const getWorkspaceStats = async (req, res) => {
 
     if (!isMember) {
       return res.status(403).json({
-        message: "You are not a member of this workspace",
+        message: "Bu çalışma alanının üyesi değilsiniz",
       });
     }
 
@@ -174,13 +174,13 @@ const getWorkspaceStats = async (req, res) => {
     });
 
     const taskTrendsData = [
-      { name: "Sun", completed: 0, inProgress: 0, toDo: 0 },
-      { name: "Mon", completed: 0, inProgress: 0, toDo: 0 },
-      { name: "Tue", completed: 0, inProgress: 0, toDo: 0 },
-      { name: "Wed", completed: 0, inProgress: 0, toDo: 0 },
-      { name: "Thu", completed: 0, inProgress: 0, toDo: 0 },
-      { name: "Fri", completed: 0, inProgress: 0, toDo: 0 },
-      { name: "Sat", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Paz", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Pzt", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Sal", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Çar", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Per", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Cum", completed: 0, inProgress: 0, toDo: 0 },
+      { name: "Cmt", completed: 0, inProgress: 0, toDo: 0 },
     ];
 
     // get last 7 days tasks date
@@ -194,6 +194,7 @@ const getWorkspaceStats = async (req, res) => {
 
     for (const project of projects) {
       for (const task in project.tasks) {
+        // for (const task of project.tasks) 
         const taskDate = new Date(task.updatedAt);
 
         const dayInDate = last7Days.findIndex(
@@ -204,11 +205,14 @@ const getWorkspaceStats = async (req, res) => {
         );
 
         if (dayInDate !== -1) {
-          const dayName = last7Days[dayInDate].toLocaleDateString("en-US", {
+          const dayNameTr = last7Days[dayInDate].toLocaleDateString("tr-TR", {
             weekday: "short",
           });
-
-          const dayData = taskTrendsData.find((day) => day.name === dayName);
+          
+          // bazen "Pzt." gibi noktalı gelebilir
+          const normalized = dayNameTr.replace(".", "");
+          
+          const dayData = taskTrendsData.find((day) => day.name === normalized);
 
           if (dayData) {
             switch (task.status) {
@@ -219,7 +223,7 @@ const getWorkspaceStats = async (req, res) => {
                 dayData.inProgress++;
                 break;
               case "To Do":
-                dayData.toDo++;
+                dayData.todo++;
                 break;
             }
           }
@@ -229,9 +233,9 @@ const getWorkspaceStats = async (req, res) => {
 
     // get project status distribution
     const projectStatusData = [
-      { name: "Completed", value: 0, color: "#10b981" },
-      { name: "In Progress", value: 0, color: "#3b82f6" },
-      { name: "Planning", value: 0, color: "#f59e0b" },
+      { key: "Completed", name: "Tamamlandı", value: 0, color: "#10b981" },
+      { key: "In Progress", name: "Devam Ediyor", value: 0, color: "#3b82f6" },
+      { key: "Planning", name: "Planlama", value: 0, color: "#f59e0b" },
     ];
 
     for (const project of projects) {
@@ -250,9 +254,9 @@ const getWorkspaceStats = async (req, res) => {
 
     // Task priority distribution
     const taskPriorityData = [
-      { name: "High", value: 0, color: "#ef4444" },
-      { name: "Medium", value: 0, color: "#f59e0b" },
-      { name: "Low", value: 0, color: "#6b7280" },
+      { key: "High", name: "Yüksek", value: 0, color: "#ef4444" },
+      { key: "Medium", name: "Orta", value: 0, color: "#f59e0b" },
+      { key: "Low", name: "Düşük", value: 0, color: "#6b7280" },
     ];
 
     for (const task of tasks) {
@@ -308,7 +312,7 @@ const getWorkspaceStats = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -322,7 +326,7 @@ const inviteUserToWorkspace = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -332,7 +336,7 @@ const inviteUserToWorkspace = async (req, res) => {
 
     if (!userMemberInfo || !["admin", "owner"].includes(userMemberInfo.role)) {
       return res.status(403).json({
-        message: "You are not authorized to invite members to this workspace",
+        message: "Bu çalışma alanına üye davet etme yetkiniz yok",
       });
     }
 
@@ -340,7 +344,7 @@ const inviteUserToWorkspace = async (req, res) => {
 
     if (!existingUser) {
       return res.status(400).json({
-        message: "User not found",
+        message: "Kullanıcı bulunamadı",
       });
     }
 
@@ -350,7 +354,7 @@ const inviteUserToWorkspace = async (req, res) => {
 
     if (isMember) {
       return res.status(400).json({
-        message: "User already a member of this workspace",
+        message: "Kullanıcı zaten bu çalışma alanının üyesi",
       });
     }
 
@@ -361,7 +365,7 @@ const inviteUserToWorkspace = async (req, res) => {
 
     if (isInvited && isInvited.expiresAt > new Date()) {
       return res.status(400).json({
-        message: "User already invited to this workspace",
+        message: "Kullanıcı zaten bu çalışma alanına davet edilmiş",
       });
     }
 
@@ -390,23 +394,23 @@ const inviteUserToWorkspace = async (req, res) => {
     const invitationLink = `${process.env.FRONTEND_URL}/workspace-invite/${workspace._id}?tk=${inviteToken}`;
 
     const emailContent = `
-      <p>You have been invited to join ${workspace.name} workspace</p>
-      <p>Click here to join: <a href="${invitationLink}">${invitationLink}</a></p>
+      <p>${workspace.name} çalışma alanına davet edildiniz.</p>
+      <p>Katılmak için bağlantıya tıklayın: <a href="${invitationLink}">${invitationLink}</a></p>
     `;
 
     await sendEmail(
       email,
-      "You have been invited to join a workspace",
+      "Çalışma alanına davet edildiniz",
       emailContent
     );
 
     res.status(200).json({
-      message: "Invitation sent successfully",
+      message: "Davet başarıyla gönderildi",
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -419,7 +423,7 @@ const acceptGenerateInvite = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -429,7 +433,7 @@ const acceptGenerateInvite = async (req, res) => {
 
     if (isMember) {
       return res.status(400).json({
-        message: "You are already a member of this workspace",
+        message: "Zaten bu çalışma alanının üyesisiniz",
       });
     }
 
@@ -447,17 +451,17 @@ const acceptGenerateInvite = async (req, res) => {
       "Workspace",
       workspaceId,
       {
-        description: `Joined ${workspace.name} workspace`,
+        description: `${workspace.name} çalışma alanına katıldı`,
       }
     );
 
     res.status(200).json({
-      message: "Invitation accepted successfully",
+      message: "Davet başarıyla kabul edildi",
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
@@ -474,7 +478,7 @@ const acceptInviteByToken = async (req, res) => {
 
     if (!workspace) {
       return res.status(404).json({
-        message: "Workspace not found",
+        message: "Çalışma alanı bulunamadı",
       });
     }
 
@@ -484,7 +488,7 @@ const acceptInviteByToken = async (req, res) => {
 
     if (isMember) {
       return res.status(400).json({
-        message: "User already a member of this workspace",
+        message: "Kullanıcı zaten bu çalışma alanının üyesi",
       });
     }
 
@@ -495,13 +499,13 @@ const acceptInviteByToken = async (req, res) => {
 
     if (!inviteInfo) {
       return res.status(404).json({
-        message: "Invitation not found",
+        message: "Davet bulunamadı",
       });
     }
 
     if (inviteInfo.expiresAt < new Date()) {
       return res.status(400).json({
-        message: "Invitation has expired",
+        message: "Davet süresi dolmuş",
       });
     }
 
@@ -521,12 +525,12 @@ const acceptInviteByToken = async (req, res) => {
     ]);
 
     res.status(200).json({
-      message: "Invitation accepted successfully",
+      message: "Davet başarıyla kabul edildi",
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Sunucu hatası oluştu",
     });
   }
 };
