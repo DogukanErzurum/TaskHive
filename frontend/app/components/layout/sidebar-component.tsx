@@ -29,32 +29,32 @@ export const SidebarComponent = ({
 
   const navItems = [
     {
-      title: "Dashboard",
+      title: "İstatistikler",
       href: "/dashboard",
       icon: LayoutDashboard,
     },
     {
-      title: "Workspaces",
+      title: "Çalışma Alanı",
       href: "/workspaces",
       icon: Briefcase,
     },
     {
-      title: "My Tasks",
+      title: "Görevlerim",
       href: "/my-tasks",
       icon: ListCheck,
     },
     {
-      title: "Members",
+      title: "Üyeler",
       href: `/members`,
       icon: Users,
     },
     {
-      title: "Achieved",
+      title: "Arşivlenenler",
       href: `/achieved`,
       icon: CheckCircle2,
     },
     {
-      title: "Settings",
+      title: "Ayarlar",
       href: "/settings",
       icon: Settings,
     },
