@@ -63,7 +63,7 @@ const Members = () => {
       </div>
     );
 
-  if (!data || !workspaceId) return <div>No workspace found</div>;
+  if (!data || !workspaceId) return <div>Çalışma alanı bulunamadı</div>;
 
   const filteredMembers = data?.members?.filter(
     (member) =>
@@ -75,11 +75,11 @@ const Members = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-start md:items-center justify-between">
-        <h1 className="text-2xl font-bold">Workspace Members</h1>
+        <h1 className="text-2xl font-bold">Çalışma Alanı Üyeleri</h1>
       </div>
 
       <Input
-        placeholder="Search members ...."
+        placeholder="Üye ara ...."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="max-w-md"
@@ -87,17 +87,17 @@ const Members = () => {
 
       <Tabs defaultValue="list">
         <TabsList>
-          <TabsTrigger value="list">List View</TabsTrigger>
-          <TabsTrigger value="board">Board View</TabsTrigger>
+          <TabsTrigger value="list">Liste Görünümü</TabsTrigger>
+          <TabsTrigger value="board">Pano Görünümü</TabsTrigger>
         </TabsList>
 
         {/* LIST VIEW */}
         <TabsContent value="list">
           <Card>
             <CardHeader>
-              <CardTitle>Members</CardTitle>
+              <CardTitle>Üyeler</CardTitle>
               <CardDescription>
-                {filteredMembers?.length} members in your workspace
+                {filteredMembers?.length} çalışma alanınızdaki üyeler
               </CardDescription>
             </CardHeader>
 
