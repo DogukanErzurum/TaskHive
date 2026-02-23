@@ -630,7 +630,7 @@ const achievedTask = async (req, res) => {
 
     // record activity
     await recordActivity(req.user._id, "updated_task", "Task", taskId, {
-      description: `${isAchieved ? "Tamamlanmadı" : "Tamamlandı"} Görev ${
+      description: `${isAchieved ? "Arşivden Çıkarıldı" : "Arşivlendi"} Görev ${
         task.title
       }`,
     });

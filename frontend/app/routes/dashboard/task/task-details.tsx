@@ -107,7 +107,7 @@ const TaskDetails = () => {
 
           {task.isArchived && (
             <Badge className="ml-2" variant={"outline"}>
-              Tamamlandı
+              Arşivlendi
             </Badge>
           )}
         </div>
@@ -140,7 +140,7 @@ const TaskDetails = () => {
             className="w-fit"
             disabled={isAchieved}
           >
-            {task.isArchived ? "Tamamlanmadı" : "Tamamlandı"}
+            {task.isArchived ? "Arşivden Çıkar" : "Arşivlendi"}
           </Button>
         </div>
       </div>

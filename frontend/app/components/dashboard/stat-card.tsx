@@ -12,45 +12,45 @@ export const StatsCard = ({ data }: { data: StatsCardProps }) => {
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
+          <CardTitle className="text-sm font-medium">Toplam Projeler</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.totalProjects}</div>
           <p className="text-xs text-muted-foreground">
-            {data.totalProjectInProgress} in progress
+            {data.totalProjectInProgress} devam etmekte
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium">Total Tasks</CardTitle>
+          <CardTitle className="text-sm font-medium">Toplam Görevler</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.totalTasks}</div>
           <p className="text-xs text-muted-foreground">
-            {data.totalTaskCompleted} completed
+            {data.totalTaskCompleted} tamamlanmış
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium">To Do</CardTitle>
+          <CardTitle className="text-sm font-medium">Yapılacaklar</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.totalTaskToDo}</div>
           <p className="text-xs text-muted-foreground">
-            Tasks waiting to be done
+            Tamamlanmayı bekleyen görevler
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium">In Progress</CardTitle>
+          <CardTitle className="text-sm font-medium">Devam Edenler</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{data.totalTaskInProgress}</div>
           <p className="text-xs text-muted-foreground">
-            Tasks currently in progress
+            Devam eden görevler
           </p>
         </CardContent>
       </Card>

@@ -12,13 +12,13 @@ export const RecentProjects = ({ data }: { data: Project[] }) => {
   return (
     <Card className="lg:col-spa-2">
       <CardHeader>
-        <CardTitle>Recent Projects</CardTitle>
+        <CardTitle>Son Projeler</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-4">
         {data.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">
-            No Recent project yet
+            Henüz yeni proje yok
           </p>
         ) : (
           data.map((project) => {
@@ -49,7 +49,7 @@ export const RecentProjects = ({ data }: { data: Project[] }) => {
                 </p>
                 <div className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span>Progress</span>
+                    <span>İlerleme</span>
                     <span>{projectProgress}%</span>
                   </div>
 

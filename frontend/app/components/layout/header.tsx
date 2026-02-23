@@ -68,7 +68,7 @@ export const Header = ({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent>
-            <DropdownMenuLabel>Workspace</DropdownMenuLabel>
+            <DropdownMenuLabel>Çalışma Alanı</DropdownMenuLabel>
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>

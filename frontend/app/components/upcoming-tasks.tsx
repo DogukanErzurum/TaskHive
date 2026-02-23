@@ -19,14 +19,14 @@ export const UpcomingTasks = ({ data }: { data: Task[] }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Upcoming Tasks</CardTitle>
-        <CardDescription>Here are the tasks that are due soon</CardDescription>
+        <CardTitle>Yaklaşan Görevler</CardTitle>
+        <CardDescription>İşte yakında teslim edilmesi gereken görevler.</CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-4">
         {data.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">
-            No upcoming tasks yet
+            Henüz yaklaşan görev yok
           </p>
         ) : (
           data.map((task) => (
