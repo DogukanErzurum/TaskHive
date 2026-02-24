@@ -62,7 +62,7 @@ export const Header = ({
                   <span className="font-medium">{selectedWorkspace?.name}</span>
                 </>
               ) : (
-                <span className="font-medium">Proje Seç</span>
+                <span className="font-medium">Çalışma Alanı Seç</span>
               )}
             </Button>
           </DropdownMenuTrigger>

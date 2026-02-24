@@ -51,7 +51,7 @@ export const InviteMemberDialog = ({
       },
       {
         onSuccess: () => {
-          toast.success("Invite sent successfully");
+          toast.success("Davetiye başarıyla gönderildi.");
           form.reset();
           setInviteTab("email");
           onOpenChange(false);
@@ -79,7 +79,7 @@ export const InviteMemberDialog = ({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Invite to Workspace</DialogTitle>
+          <DialogTitle>Çalışma Alanına Davet</DialogTitle>
         </DialogHeader>
 
         <Tabs
@@ -89,10 +89,10 @@ export const InviteMemberDialog = ({
         >
           <TabsList>
             <TabsTrigger value="email" disabled={isPending}>
-              Send Email
+              E-posta Gönder
             </TabsTrigger>
             <TabsTrigger value="link" disabled={isPending}>
-              Share Link
+              Bağlantıyı Paylaş
             </TabsTrigger>
           </TabsList>
 
@@ -107,9 +107,9 @@ export const InviteMemberDialog = ({
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email Address</FormLabel>
+                            <FormLabel>E-posta Adresi</FormLabel>
                             <FormControl>
-                              <Input {...field} placeholder="Enter email" />
+                              <Input {...field} placeholder="E-postayı girin" />
                             </FormControl>
                           </FormItem>
                         )}
@@ -120,7 +120,7 @@ export const InviteMemberDialog = ({
                         name="role"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Select Role</FormLabel>
+                            <FormLabel>Rol Seçin</FormLabel>
                             <FormControl>
                               <div className="flex gap-3 flex-wrap">
                                 {ROLES.map((role) => (
@@ -139,7 +139,7 @@ export const InviteMemberDialog = ({
                                       className={cn(
                                         "w-7 h-7 rounded-full  border-2 border-blue-300 flex items-center justify-center transition-all duration-300 hover:shadow-lg bg-blue-900 text-white",
                                         field.value === role &&
-                                          "ring-2 ring-blue-500 ring-offset-2 "
+                                        "ring-2 ring-blue-500 ring-offset-2 "
                                       )}
                                     >
                                       {field.value === role && (
@@ -162,7 +162,7 @@ export const InviteMemberDialog = ({
                       disabled={isPending}
                     >
                       <Mail className="w-4 h-4 mr-2" />
-                      Send
+                      Gönder
                     </Button>
                   </form>
                 </Form>
@@ -173,7 +173,7 @@ export const InviteMemberDialog = ({
           <TabsContent value="link">
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <Label>Share this link to invite people</Label>
+                <Label>Bu bağlantıyı paylaşarak insanları davet edin.</Label>
                 <div className="flex items-center space-x-2">
                   <Input
                     readOnly
@@ -183,19 +183,19 @@ export const InviteMemberDialog = ({
                     {linkCopied ? (
                       <>
                         <Check className="mr-2 h-4 w-4" />
-                        Copied
+                        Kopyalandı
                       </>
                     ) : (
                       <>
                         <Copy className="mr-2 h-4 w-4" />
-                        Copy
+                        Kopyala
                       </>
                     )}
                   </Button>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground">
-                Anyone with the link can join this workspace
+                Bağlantıya sahip herkes bu çalışma alanına katılabilir.
               </p>
             </div>
           </TabsContent>

@@ -28,7 +28,7 @@ const WorkspaceInvite = () => {
   const navigate = useNavigate();
 
   if (!workspaceId) {
-    return <div>Workspace not found</div>;
+    return <div>Çalışma alanı bulunamadı</div>;
   }
 
   const { data: workspace, isLoading } = useGetWorkspaceDetailsQuery(
@@ -51,7 +51,7 @@ const WorkspaceInvite = () => {
     if (token) {
       acceptInviteByToken(token, {
         onSuccess: () => {
-          toast.success("Invitation accepted");
+          toast.success("Davet başarıyla kabul edildi");
           navigate(`/workspaces/${workspaceId}`);
         },
         onError: (error: any) => {
@@ -62,7 +62,7 @@ const WorkspaceInvite = () => {
     } else {
       acceptGenerateInvite(workspaceId, {
         onSuccess: () => {
-          toast.success("Invitation accepted");
+          toast.success("Davet başarıyla kabul edildi");
           navigate(`/workspaces/${workspaceId}`);
         },
         onError: (error: any) => {
@@ -74,7 +74,7 @@ const WorkspaceInvite = () => {
   };
 
   const handleDeclineInvite = () => {
-    toast.info("Invitation declined");
+    toast.info("Davet reddedildi");
     navigate("/workspaces");
   };
 
@@ -91,14 +91,14 @@ const WorkspaceInvite = () => {
       <div className="flex items-center justify-center h-screen">
         <Card className="max-w-md">
           <CardHeader>
-            <CardTitle>Invalid Invitation</CardTitle>
+            <CardTitle>Geçersiz Davet</CardTitle>
             <CardDescription>
-              This workspace invitation is invalid or has expired.
+              Bu çalışma alanı daveti geçersiz veya süresi dolmuş.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button onClick={() => navigate("/workspaces")} className="w-full">
-              Go to Workspaces
+              Çalışma Alanlarına Git
             </Button>
           </CardContent>
         </Card>
@@ -114,8 +114,8 @@ const WorkspaceInvite = () => {
             <CardTitle>{workspace.name}</CardTitle>
           </div>
           <CardDescription>
-            You've been invited to join the "<strong>{workspace.name}</strong>"
-            workspace.
+            "<strong>{workspace.name}</strong>" çalışma alanına katılmanız için
+            davet edildiniz.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -134,8 +134,8 @@ const WorkspaceInvite = () => {
               }
             >
               {isAcceptInviteByTokenPending || isAcceptGenerateInvitePending
-                ? "Joining..."
-                : "Accept Invitation"}
+                ? "Katılıyor..."
+                : "Daveti Kabul Et"}
             </Button>
             <Button
               variant="outline"
@@ -145,7 +145,7 @@ const WorkspaceInvite = () => {
                 isAcceptInviteByTokenPending || isAcceptGenerateInvitePending
               }
             >
-              Decline
+              Reddet
             </Button>
           </div>
         </CardContent>

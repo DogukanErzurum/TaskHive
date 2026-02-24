@@ -5,7 +5,6 @@ import { ProjectCard } from "../project/project-card";
 interface ProjectListProps {
   workspaceId: string;
   projects: Project[];
-
   onCreateProject: () => void;
 }
 
@@ -27,7 +26,12 @@ export const ProjectList = ({
           />
         ) : (
           projects.map((project) => {
-            const projectProgress = 0;
+            const tasks = project.tasks ?? [];
+            const total = tasks.length;
+            const completed = tasks.filter((t) => t.status === "Done").length;
+
+            const projectProgress =
+              total > 0 ? Math.round((completed / total) * 100) : 0;
 
             return (
               <ProjectCard
