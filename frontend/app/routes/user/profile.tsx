@@ -38,19 +38,19 @@ const changePasswordSchema = z
   .object({
     currentPassword: z
       .string()
-      .min(1, { message: "Current password is required" }),
-    newPassword: z.string().min(8, { message: "New password is required" }),
+      .min(1, { message: "Mevcut şifre zorunludur" }),
+    newPassword: z.string().min(8, { message: "Yeni şifre en az 8 karakter olmalıdır" }),
     confirmPassword: z
       .string()
-      .min(8, { message: "Confirm password is required" }),
+      .min(8, { message: "Şifre tekrarı zorunludur" }),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords do not match",
+    message: "Şifreler eşleşmiyor",
     path: ["confirmPassword"],
   });
 
 const profileSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
+  name: z.string().min(1, { message: "Ad Soyad zorunludur" }),
   profilePicture: z.string().optional(),
 });
 
@@ -98,7 +98,7 @@ const Profile = () => {
     changePassword(values, {
       onSuccess: () => {
         toast.success(
-          "Password updated successfully. You will be logged out. Please login again."
+          "Parola başarıyla güncellendi. Oturumunuz kapatılacaktır. Lütfen tekrar giriş yapın."
         );
         form.reset();
 
@@ -109,7 +109,7 @@ const Profile = () => {
       },
       onError: (error: any) => {
         const errorMessage =
-          error.response?.data?.error || "Failed to update password";
+          error.response?.data?.error || "Parola güncelleme başarısız oldu.";
         toast.error(errorMessage);
         console.log(error);
       },
@@ -121,11 +121,11 @@ const Profile = () => {
       { name: values.name, profilePicture: values.profilePicture || "" },
       {
         onSuccess: () => {
-          toast.success("Profile updated successfully");
+          toast.success("Profil başarıyla güncellendi");
         },
         onError: (error: any) => {
           const errorMessage =
-            error.response?.data?.error || "Failed to update profile";
+            error.response?.data?.error || "Profil güncellemesi başarısız oldu.";
           toast.error(errorMessage);
           console.log(error);
         },
@@ -144,9 +144,9 @@ const Profile = () => {
     <div className="space-y-8">
       <div className="px-4 md:px-0">
         <BackButton />
-        <h3 className="text-lg font-medium">Profile Information</h3>
+        <h3 className="text-lg font-medium">Profil Bilgileri</h3>
         <p className="text-sm text-muted-foreground">
-          Manage your account settings and preferences.
+          Hesap ayarlarınızı ve tercihlerinizi buradan yönetebilirsiniz.
         </p>
       </div>
 
@@ -154,8 +154,8 @@ const Profile = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Personal Information</CardTitle>
-          <CardDescription>Update your personal details.</CardDescription>
+          <CardTitle>Kişisel Bilgiler</CardTitle>
+          <CardDescription>Kişisel bilgilerinizi güncelleyin.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...profileForm}>
@@ -178,9 +178,9 @@ const Profile = () => {
                 </Avatar>
                 <div>
 
-                <label htmlFor="avatar-upload" className="sr-only">
-  Upload avatar
-</label>
+                  <label htmlFor="avatar-upload" className="sr-only">
+                    Profil fotoğrafı yükle
+                  </label>
                   <input
                     id="avatar-upload"
                     type="file"
@@ -196,9 +196,9 @@ const Profile = () => {
                     onClick={() =>
                       document.getElementById("avatar-upload")?.click()
                     }
-                    // disabled={uploading || isUpdatingProfile}
+                  // disabled={uploading || isUpdatingProfile}
                   >
-                    Change Avatar
+                    Profil Fotoğrafını Değiştir
                   </Button>
                 </div>
               </div>
@@ -207,7 +207,7 @@ const Profile = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Ad Soyad</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -216,7 +216,7 @@ const Profile = () => {
                 )}
               />
               <div className="grid gap-2">
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email">E-posta Adresi</Label>
                 <Input
                   id="email"
                   type="email"
@@ -224,7 +224,7 @@ const Profile = () => {
                   disabled
                 />
                 <p className="text-xs text-muted-foreground">
-                  Your email address cannot be changed.
+                  E-posta adresiniz değiştirilemez.
                 </p>
               </div>
               <Button
@@ -235,10 +235,10 @@ const Profile = () => {
                 {isUpdatingProfile ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
+                    Kaydediliyor...
                   </>
                 ) : (
-                  "Save Changes"
+                  "Değişiklikleri Kaydet"
                 )}
               </Button>
             </form>
@@ -248,8 +248,8 @@ const Profile = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Security</CardTitle>
-          <CardDescription>Update your password.</CardDescription>
+          <CardTitle>Güvenlik</CardTitle>
+          <CardDescription>Şifrenizi güncelleyin.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -270,7 +270,7 @@ const Profile = () => {
                   name="currentPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Current Password</FormLabel>
+                      <FormLabel>Mevcut Şifre</FormLabel>
                       <FormControl>
                         <Input
                           id="current-password"
@@ -289,7 +289,7 @@ const Profile = () => {
                   name="newPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>New Password</FormLabel>
+                      <FormLabel>Yeni Şifre</FormLabel>
                       <FormControl>
                         <Input
                           id="new-password"
@@ -308,7 +308,7 @@ const Profile = () => {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>Yeni Şifre (Tekrar)</FormLabel>
                       <FormControl>
                         <Input
                           id="confirm-password"
@@ -331,10 +331,10 @@ const Profile = () => {
                 {isPending || isChangingPassword ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Updating...
+                    Güncelleniyor...
                   </>
                 ) : (
-                  "Update Password"
+                  "Şifreyi Güncelle"
                 )}
               </Button>
             </form>

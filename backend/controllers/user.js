@@ -6,7 +6,7 @@ const getUserProfile = async (req, res) => {
     const user = await User.findById(req.user._id).select("-password");
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
     }
     delete user.password;
 
@@ -14,9 +14,9 @@ const getUserProfile = async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    console.error("Error fetching user profile:", error);
+    console.error("Kullanıcı profili alınırken hata oluştu:", error);
 
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 
@@ -27,7 +27,7 @@ const updateUserProfile = async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
     }
 
     user.name = name;
@@ -37,9 +37,9 @@ const updateUserProfile = async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    console.error("Error updating user profile:", error);
+    console.error("Kullanıcı profili güncellenirken hata oluştu:", error);
 
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 
@@ -50,13 +50,13 @@ const changePassword = async (req, res) => {
     const user = await User.findById(req.user._id).select("+password");
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
     }
 
     if (newPassword !== confirmPassword) {
       return res
         .status(400)
-        .json({ message: "New password and confirm password do not match" });
+        .json({ message: "Yeni şifre ile şifre tekrarı eşleşmiyor" });
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -65,7 +65,7 @@ const changePassword = async (req, res) => {
     );
 
     if (!isPasswordValid) {
-      return res.status(403).json({ message: "Invalid old password" });
+      return res.status(403).json({ message: "Geçersiz eski şifre" });
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -73,11 +73,11 @@ const changePassword = async (req, res) => {
     user.password = hashedPassword;
     await user.save();
 
-    res.status(200).json({ message: "Password updated successfully" });
+    res.status(200).json({ message: "Şifre başarıyla güncellendi" });
   } catch (error) {
-    console.error("Error changing password:", error);
+    console.error("Şifre değiştirilirken hata oluştu:", error);
 
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Sunucu hatası" });
   }
 };
 
