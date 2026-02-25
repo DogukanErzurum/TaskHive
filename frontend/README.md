@@ -1,87 +1,107 @@
-# Welcome to React Router!
+# TaskHive Backend
 
-A modern, production-ready template for building full-stack React applications using React Router.
+TaskHive backend is a **RESTful API server** built with Node.js, Express, and MongoDB.  
+It handles authentication, workspace management, project management, task operations, and analytics.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+---
 
-## Features
+# Tech Stack
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+Node.js  
+Express.js  
+MongoDB  
+Mongoose  
+JWT Authentication  
+Zod Validation  
+SendGrid (Email Service)  
+Arcjet (Security & Rate Limiting)  
 
-## Getting Started
+---
 
-### Installation
+# Features
 
-Install the dependencies:
+• JWT-based authentication  
+• Email verification and password reset  
+• Workspace and member management  
+• Project management  
+• Task management (status, priority, assignees, subtasks)  
+• Comments and activity timeline  
+• Protected routes and request validation  
+
+---
+
+# API Base URL
+
+```
+http://localhost:5000/api-v1
+```
+
+---
+
+# Installation
 
 ```bash
 npm install
 ```
 
-### Development
+---
 
-Start the development server with HMR:
+# Run Development Server
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+---
 
-## Building for Production
+# Environment Variables
 
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+Create a `.env` file inside the backend folder:
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+
+SEND_GRID_API=your_sendgrid_api_key
+
+FROM_EMAIL=your_verified_email
+
+ARCJET_KEY=your_arcjet_key
+
+FRONTEND_URL=http://localhost:5173
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
 ---
 
-Built with ❤️ using React Router.
+# Project Structure
+
+```
+backend
+│
+├── controllers
+├── models
+├── routes
+├── middleware
+├── libs
+├── index.js
+```
+
+---
+
+# Authentication
+
+Protected endpoints require:
+
+```
+Authorization: Bearer <token>
+```
+
+---
+
+# Author
+
+Doğukan Erzurum  
+https://github.com/DogukanErzurum
