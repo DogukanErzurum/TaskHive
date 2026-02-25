@@ -240,7 +240,7 @@ GitHub
 https://github.com/DogukanErzurum
 
 LinkedIn  
-https://linkedin.com
+[https://linkedin.com](https://www.linkedin.com/feed/)
 
 ---
 
