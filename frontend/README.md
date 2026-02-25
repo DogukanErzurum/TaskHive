@@ -1,40 +1,32 @@
-# TaskHive Backend
+# TaskHive Frontend
 
-TaskHive backend is a **RESTful API server** built with Node.js, Express, and MongoDB.  
-It handles authentication, workspace management, project management, task operations, and analytics.
+TaskHive frontend is a modern **React + TypeScript** application providing the user interface for workspace, project, and task management.
+
+It communicates with the TaskHive backend via a REST API and provides a responsive, production-ready user experience.
 
 ---
 
 # Tech Stack
 
-Node.js  
-Express.js  
-MongoDB  
-Mongoose  
-JWT Authentication  
-Zod Validation  
-SendGrid (Email Service)  
-Arcjet (Security & Rate Limiting)  
+React  
+TypeScript  
+React Router v7  
+TailwindCSS v4  
+Shadcn UI  
+TanStack Query  
+Axios  
+Recharts  
 
 ---
 
 # Features
 
-• JWT-based authentication  
-• Email verification and password reset  
-• Workspace and member management  
-• Project management  
-• Task management (status, priority, assignees, subtasks)  
-• Comments and activity timeline  
-• Protected routes and request validation  
-
----
-
-# API Base URL
-
-```
-http://localhost:5000/api-v1
-```
+• Workspace and project management UI  
+• Kanban task board  
+• Task detail view with comments and subtasks  
+• Statistics and analytics dashboard  
+• Authentication and user profile management  
+• Responsive and modern UI  
 
 ---
 
@@ -52,26 +44,35 @@ npm install
 npm run dev
 ```
 
----
-
-# Environment Variables
-
-Create a `.env` file inside the backend folder:
+Runs on:
 
 ```
-PORT=5000
+http://localhost:5173
+```
 
-MONGODB_URI=your_mongodb_connection_string
+---
 
-JWT_SECRET=your_secret_key
+# Build for Production
 
-SEND_GRID_API=your_sendgrid_api_key
+```bash
+npm run build
+npm run start
+```
 
-FROM_EMAIL=your_verified_email
+---
 
-ARCJET_KEY=your_arcjet_key
+# Backend Connection
 
-FRONTEND_URL=http://localhost:5173
+Make sure backend is running:
+
+```
+http://localhost:5000
+```
+
+If needed, configure API base URL using `.env`:
+
+```
+VITE_API_BASE_URL=http://localhost:5000/api-v1
 ```
 
 ---
@@ -79,24 +80,13 @@ FRONTEND_URL=http://localhost:5173
 # Project Structure
 
 ```
-backend
+frontend
 │
-├── controllers
-├── models
-├── routes
-├── middleware
-├── libs
-├── index.js
-```
-
----
-
-# Authentication
-
-Protected endpoints require:
-
-```
-Authorization: Bearer <token>
+├── app
+├── components
+├── hooks
+├── lib
+├── types
 ```
 
 ---
